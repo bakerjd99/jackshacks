@@ -13,11 +13,15 @@ To install `jackshacks` enter the **indented** lines in jconsole or jqt.
 installed: bakerjd99/jackshacks master into folder: jacks
 
    dir '~addons/jacks'
-ipynb          <dir>     26-Jul-22 10:11:08
-ipynb.ijs           4615 26-Jul-22 11:20:01
-ipynb.pdf          84363 26-Jul-22 11:20:01
-manifest.ijs         589 26-Jul-22 11:20:01
+brandxmp.ijs       12917 26-Jul-22 11:44:56
+brandxmp.pdf      121379 26-Jul-22 11:44:56
+ipynb.ijs           4615 26-Jul-22 10:46:15
+ipynb.pdf          84363 26-Jul-22 10:46:15
+manifest.ijs         615 26-Jul-22 11:44:56
 ```
+
+To keep `jackshacks` current simply reinstall. Any new files will be
+downloaded and changes to existing files will overwrite local copies.
 
 ## Run `jackshacks` scripts
 
