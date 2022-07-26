@@ -20,6 +20,8 @@ RELEASE=: ''
 FOLDER=: 'jacks'
 
 FILES=: 0 : 0
+brandxmp.ijs
+brandxmp.pdf
 ipynb.ijs
 ipynb.pdf
 )
