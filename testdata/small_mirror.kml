@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Small Mirror Geotagged</name>
+    <description/>
+    <Style id="icon-503-DB4436-nodesc-normal">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-503-DB4436-nodesc-highlight">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-503-DB4436-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-503-DB4436-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-503-DB4436-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>geotagged_images.gpx</name>
+      <Placemark>
+        <name>mookie peppa morty pigs</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.6716,43.655780556,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me squinting horseshoe bend</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -111.510666667,36.879333333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mule poop</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -112.052758333,36.212755556,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me mali north rim outlook</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -112.053633333,36.1967,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>past supai tunnel kaibab trail</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -112.049247222,36.211369444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>old buffalo jumpers</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -113.653333333,49.7055,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>family of man figure calgary</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -114.060166667,51.047666667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me botanical garden fairy house</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.1605,43.601111111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>palouse canyon scablands</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.228263889,46.66235,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>bridge rail trestle dock near palouse falls</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.219333333,46.586833333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me roundhouse deck sun valley</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -114.387833333,43.6625,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>capitol reef visitor center cliffs</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -111.262222222,38.29145,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me new prescription shades</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.3525,43.671166667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>cascade flea market lawn spinners</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.019666667,44.496666667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me darktable watermark zero</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -114.868286111,39.258369444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>house 1983 glenburnie winter 1991</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -76.463652778,44.308683333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>dawson yukon street panorama 2002</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -139.435086111,64.060130556,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me steve aileen sibling selfie</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -110.586166667,45.662,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>up river celebration park overlook</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.527666667,43.299333333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mali rock campground</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -113.718491667,42.074694444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>sun valley white pavillion ski slopes</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -114.351455556,43.695461111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>oasis bordello museum wallace</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -115.923547222,47.472480556,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>sandpoint city park beach trees</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.541052778,48.273638889,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>priest lake bear carving</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.921647222,48.537913889,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>helen tim curb beverage</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -79.390944444,43.647683333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>portland catch of the day</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -122.670975,45.522602778,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>skywalk building canyon west</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -113.811116667,36.011166667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>dominant roadtrip view</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -114.623969444,38.382175,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>sun valley lodge winter</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -114.354383333,43.695416667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me bay of fundy sep 1984</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -64.572697222,45.821133333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>painted hills overlook panorama</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -120.266683333,44.6498,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>cusco wall saqsaywaman 1979</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -71.9816012,-13.8568588,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>fishing kailua kona waterfront wall</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -155.995772222,19.640116667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>praying statue painted church cemetery</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -155.888733333,19.435016667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mokuaikaua church gate</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -155.993911111,19.639413889,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ruth kwajalein airport sign 1981</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            167.741183333,8.72705,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ketchum stanley highway 75</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -114.568183333,43.788205556,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>praying hands cemetery monument</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.341466667,43.617611111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ligo suspension poster</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -119.403808333,46.453847222,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>truth can still be found</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.382880556,43.640408333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>bogus basin tubing hill</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.108658333,43.764469444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>a10 dark side</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.224188889,43.557961111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>fair ferris wheels</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.276816667,43.653983333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>botanical garden circle pavilion</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.160163889,43.601208333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>table rock botanical garden</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.160011111,43.601741667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>botanical garden guard tower</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.161508333,43.600569444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>kleiner park pond geese</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.346694444,43.624702778,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>boise art museum</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.206955556,43.609658333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>meridian terra cotta statue</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.357955556,43.610725,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mali old boise mural</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.201111111,43.614608333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>grand geyser winter crowd</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -110.837502778,44.467113889,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>old faithful winter eruption yellowstone</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -110.823861111,44.464441667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>sunset cemetery autumn</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -111.026719444,45.674386111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>two sisters cafe sign</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -113.412666667,48.808833333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mali west glacier entrance sign</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -113.433166667,48.744833333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>swiftcurrent lake many glacier</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -113.65805,48.796244444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>wilsall roadside statue</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -110.662680556,46.005766667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me dumas brothel museum butte</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -112.533833333,46.011333333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me high roller dusk</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -115.168,36.117333333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ceramic chilies</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -105.936833333,35.687666667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>big jesus sale sign</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -105.956619444,35.675669444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>south view ski basin road lookout</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -105.808747222,35.786897222,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>santa fe plaza spring south</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -105.938069444,35.687308333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>amtrack train castlewood bluffs</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.557725,38.547066667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me syracuse apartment 1992-6</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -76.195502778,43.100886111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mali taos pueblo church cemetery</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -105.546636111,36.438583333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>tax payments</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -105.940894444,35.688713889,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mammoth site building</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -103.483125,43.424919444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mali sedi laclede landing district</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.183763889,38.630783333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>selfie on castewood bluff</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.551108333,38.548277778,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>boy tower grove wading pool</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.259680556,38.606725,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>fountain tower grove park wading pool</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.259619444,38.606711111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>steve me aileen barbados</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -59.640433333,13.192225,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>kimmswick frog figurine</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.36375,38.365555556,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mali stone hill winery hermann</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -91.446583333,38.696736111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>meramec river photosphere</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.533791667,38.547016667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mali partial nude kingston motel iphone</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -76.496833333,44.266833333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>creve coeur lake ice</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.479,38.714,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mali above thermopolis</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -108.191261111,43.659911111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>lewis and clark exit trail</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -111.876138889,45.837138889,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me edmonton lansdowne backyard snow</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -113.552647222,53.489019444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mahin nursing home petting zoo iphone</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -79.407833333,43.788166667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>light funnel telescope iphone</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -111.499166667,36.969,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>creve coeur logo iphone</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.4485,38.672333333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>running girl statue iphone</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.573333333,38.651166667,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me saint luke hospital wheelchair iphone</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.502997,38.652039,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>boy on park giant sculpture iphone</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.571167,38.6515,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>monks cahokia mound eastern side</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -90.05996,38.66001,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>armed and dangerous</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -79.84717,38.00153,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>sue mali steve castle gallery fort wayne</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -85.1544,41.07605,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>zigarat full height</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            48.520728,32.008313,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me mom steve waterworks</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            48.858125,32.044365,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>gert driveway pano 1969-4x12</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -110.571088,45.594691,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>bluffton street fair classic cars</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -85.17149,40.73713,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>white sands visitor center</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -106.171954,32.77955,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>arlington west</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.497537,34.009532,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me gettysburg</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -77.232478,39.81773,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>helen on klondike riverboat</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -135.047527,60.713468,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mid pacific marine lab from air</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            162.346925,11.358397,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>feels so good</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -93.6035,41.5897,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>shoreline park lighthouse</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.194142,33.760347,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mali palm springs</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -116.546997,33.82087,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>jpl</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.174707,34.199881,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>glacier point yosemite</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -119.573872,37.730759,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>getty center - day 50</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -118.47425,34.076697,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>jones falls bridge and hotel</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -76.237038,44.544862,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>train and station</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -76.5391,44.2554,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>fort henry tower</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -76.458,44.2291,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>me parliment parking mirror</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -75.7019,45.4222,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>rideau canal by carleton</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -75.70003,45.384339,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>wiseman at sunset</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -93.2374,44.9731,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>jacob downsview yard</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -76.4629,44.3088,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
