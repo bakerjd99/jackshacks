@@ -11,9 +11,15 @@ how to use the corresponding ijs script. JOD is not required to
 run any of these scripts. You typically load jackshacks with commands like:
 
 load '~addons/jacks/ipynb.ijs'
+
+The subdirectory (testdata) contains sample input files. One of
+the files (small_mirror.db) is a SQLite database that contains
+geotagged image metadata used by (gpxutils.ijs). Other files in 
+(testdata) are sample CSV, GPX, KML and XMP files used by
+jackshacks scripts.
 )
 
-VERSION=: '0.5.0'
+VERSION=: '0.7.0'
 
 RELEASE=: ''
 
@@ -22,6 +28,9 @@ FOLDER=: 'jacks'
 FILES=: 0 : 0
 brandxmp.ijs
 brandxmp.pdf
+gpxutils.ijs
+gpxutils.pdf
 ipynb.ijs
 ipynb.pdf
+testdata/gps_oz_nz_2022.txt
 )
