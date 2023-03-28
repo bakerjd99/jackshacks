@@ -32,9 +32,14 @@ gpxutils.ijs
 gpxutils.pdf
 ipynb.ijs
 ipynb.pdf
+riseset.ijs
+riseset.pdf
 testdata/_DSC8471.NEF.xmp
 testdata/gps_oz_nz_2022.txt
 testdata/small_mirror.db
 testdata/small_mirror.kml
 testdata/10_best_us_star_gazing.csv
+testdata/iau_named_stars_2022.txt
+testdata/Navigation_Stars.txt
+testdata/Bright_Stars_Meridian_Almanac_23mar27.md
 )
