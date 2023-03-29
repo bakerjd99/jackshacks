@@ -47,7 +47,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.8.0';7;'28 Mar 2023 14:20:21'
+VMDriseset=:'0.8.0';9;'28 Mar 2023 18:41:03'
 
 NB. all zero, first, second, ... nth differences of nl: alldifs ?.10#100
 alldifs=:([: >: [: i. [: - #) {.&.> [: <"1 (}. - }:)^:(i.@#@[)
@@ -750,16 +750,21 @@ riseset=:4 : 0
 
 NB.*riseset v-- rise, transit, set times of IAU named stars.
 NB.
-NB. dyad:  blYmdUtoLB riseset blclStarNames
+NB. dyad:  bt=. blYMD_UO_LB_AOBJ riseset blclStarNames
 NB. 
 NB.   LB=.  _116.375956 43.646775    NB. Meridian 
 NB.   YMD=. 2023 3 27
 NB.   UO=.  6
 NB.   (YMD;UO;LB) riseset 'Algol' 
 NB.   (YMD;UO;LB) riseset 'Algol';'Rigel';'Spica'
+NB.
+NB.   NB. add objects not IAU names - need name, ra, dec
+NB.   AOB=. (<;:'Venus'),(<41.73129),<18.44092
+NB.   AOB=. ,&.> (;:'OBJ_Name OBJ_RA_J2000 OBJ_Dec_J2000') ,. AOB
+NB.   (YMD;UO;LB;<AOB) riseset 'Venus'
 
 NB. local time, UT offset (0=Greenwich), Latitude Longitude
-'ymfd uo LB'=. x
+'ymfd uo LB AOB'=. 4 {. x
 
 NB. convert LB to meeus convention
 LB=. _1 1 * LB
@@ -772,6 +777,15 @@ NB. look up RA, Dec
 NB. IAU stars !(*)=. IAU_Name RA_J2000 Dec_J2000
 ({."1 IAU)=. {:"1 IAU
 Stars=. boxopen y
+
+if. #AOB do.
+  NB. insert additional objects 
+  ({."1 AOB)=. {:"1 AOB
+  NB. !(*)=. OBJ_Dec_J2000 OBJ_Name OBJ_RA_J2000
+  IAU_Name=.  OBJ_Name , IAU_Name
+  RA_J2000=.  OBJ_RA_J2000 , RA_J2000
+  Dec_J2000=. OBJ_Dec_J2000 , Dec_J2000
+end.
 
 if. 0 e. b=. Stars e. IAU_Name do.
   smoutput 'not in IAU named stars -> '; Stars #~ -.b
@@ -801,7 +815,11 @@ obj=. obj ,"0 1 a:,a:  NB. result table
 
 NB. dynamical time ΔT in fractional days NOTE: ΔT is not 
 NB. going to change a lot over the interpolation period
-dTfd=. (,/deltaT0 deltaTdy ymd) % DAYSECS
+if. 0=nc<'DeltaTsOveride_riseset_' do.
+  dTfd=. DeltaTsOveride_riseset_ % DAYSECS 
+else.
+  dTfd=. (,/deltaT0 deltaTdy ymd) % DAYSECS
+end. 
 
 NB. apparent sidereal time Greenwich at 0h in degrees
 th0=. ,/ddfrdms 15 * apparsidjd0 julfrcal ymd
@@ -898,7 +916,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230328j142021
+NB. (riseset) interface word(s): 20230328j184103
 NB. ----------------------------
 NB. iau_tonight  NB. named IAU stars visible tonight
 NB. loadstars    NB. loads riseset star data
