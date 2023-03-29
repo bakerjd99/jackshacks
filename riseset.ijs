@@ -2,13 +2,14 @@ NB.*riseset s-- compute rise, transit and set times of IAU named stars.
 NB.
 NB. verbatim: interface word(s):
 NB. ------------------------------------------------------------------------------
-NB.  iau_tonight - named IAU stars visible tonight
-NB.  loadstars   - loads riseset star data
-NB.  riseset     - rise, transit, set times of stars
+NB.  iau_today - named IAU stars rising/setting today
+NB.  loadstars - loads riseset star data
+NB.  riseset   - rise, transit, set times of stars
 NB.
 NB. created: 2023mar09
 NB. changes: ---------------------------------------------------------------------
-NB. 23mar28 (iau_tonight) added
+NB. 23mar29 (iau_tonight) renamed (iau_today) 
+NB. 23mar29 various location setting verbs (location_uluru) added
 
 coclass 'riseset'
 NB.*end-header
@@ -23,7 +24,7 @@ NB. seconds per day
 DAYSECS=:86400
 
 NB. interface words (IFACEWORDSriseset) group
-IFACEWORDSriseset=:<;._1 ' iau_tonight loadstars riseset'
+IFACEWORDSriseset=:<;._1 ' iau_today loadstars riseset'
 
 NB. horizon limit in degrees
 LIMITHORZ=:20
@@ -38,7 +39,7 @@ NB. observer latitude longitude, west longitudes negative
 OBSLOCATION=:_116.375956000000002 43.6467749999999981
 
 NB. root words (ROOTWORDSriseset) group      
-ROOTWORDSriseset=:<;._1 ' IFACEWORDSriseset ROOTWORDSriseset VMDriseset iau_tonight yyyymmfd'
+ROOTWORDSriseset=:<;._1 ' IFACEWORDSriseset ROOTWORDSriseset VMDriseset fdfrhms iau_today location_home location_uluru location_yellowstone'
 
 NB. standard altitude stars - compensates for horizon atmospheric refraction
 STDALTITUDE=:0.566699999999999982
@@ -47,7 +48,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.8.0';9;'28 Mar 2023 18:41:03'
+VMDriseset=:'0.8.0';15;'29 Mar 2023 11:31:41'
 
 NB. all zero, first, second, ... nth differences of nl: alldifs ?.10#100
 alldifs=:([: >: [: i. [: - #) {.&.> [: <"1 (}. - }:)^:(i.@#@[)
@@ -329,15 +330,15 @@ NB. hours, minutes from decimal seconds: hmfrds dsfrhms 20 27 43.23
 hmfrds=:[: 24 60&#: 60 %~ ]
 
 
-iau_tonight=:3 : 0
+iau_today=:3 : 0
 
-NB.*iau_tonight v-- named IAU stars rising/setting tonight.
+NB.*iau_today v-- named IAU stars rising/setting today.
 NB.
-NB. monad:  bt =. iau_tonight uuIgnore
+NB. monad:  bt =. iau_today uuIgnore
 NB.
-NB.   iau_tonight 0
+NB.   iau_today 0
 NB.
-NB. dyad:  bt =. blYmd_LB_U0_LMAG_LHORZ iau_tonight uuIgnore
+NB. dyad:  bt =. blYmd_LB_U0_LMAG_LHORZ iau_today uuIgnore
 NB.
 NB.   NB. date of Uluru star party diner
 NB.   YMD=. 2022 10 19
@@ -345,9 +346,9 @@ NB.   ULURU=. 131.01941 _25.34301
 NB.   UTC=. _9.5 
 NB.   LMAG=. 6.0
 NB.   LHORZ=. 5
-NB.   (YMD;ULURU;UTC;LMAG;LHORZ) iau_tonight 0
+NB.   (YMD;ULURU;UTC;LMAG;LHORZ) iau_today 0
 
-((3 {. 6!:0 '');OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ) iau_tonight y
+((3 {. 6!:0 '');OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ) iau_today y
 :
 NB. date, location, UTC offset, magnitude, horizon
 'YMD LB UO LMAG LHORZ'=. x
@@ -466,6 +467,84 @@ if. x -: 1 do.
 end.
 
 (<ciau),<cnavs
+)
+
+
+location_home=:3 : 0
+
+NB.*location_home v-- set parameters for "home" location.
+NB.
+NB. monad:  location_home uuIgnore
+NB.
+NB.   location_home 0  NB. set location
+NB.   iau_today 0      NB. uses set location with current date
+NB.
+NB.   NB. uses location with set date
+NB.   (location_home 0) iau_today 0
+
+NB. test date https://www.almanac.com/astronomy/bright-stars/zipcode/83646/2023-03-27
+ymd=. 2023 3 27
+
+NB. longitude, latitude with standard signs 
+OBSLOCATION_riseset_=: _116.375956 43.646775  NB. Meridian 
+
+UTCOFFSET_riseset_=: 6.0   NB. MST time zone
+LIMITMAG_riseset_=:  3.0   NB. stellar magnitude
+LIMITHORZ_riseset_=: 20    NB. degrees above horizon
+
+ymd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ
+)
+
+
+location_uluru=:3 : 0
+
+NB.*location_uluru v-- set parameters for Uluru location.
+NB.
+NB. monad:  location_uluru uuIgnore
+NB.
+NB.   location_uluru 0  NB. set location
+NB.   iau_today 0       NB. uses set location with current date
+NB.
+NB.   NB. uses location with set date
+NB.   (location_uluru 0) iau_today 0
+
+NB. date of Uluru star party diner
+ymd=. 2022 10 19
+
+NB. lat,lon with standard signs 
+OBSLOCATION_riseset_=: 131.01941 _25.34301
+
+UTCOFFSET_riseset_=: _9.5   NB. time zone
+LIMITMAG_riseset_=: 6.0     NB. stellar magnitude
+LIMITHORZ_riseset_=: 5      NB. degrees above horizon
+
+ymd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ
+)
+
+
+location_yellowstone=:3 : 0
+
+NB.*location_yellowstone v-- set parameters for Old Faithful location.
+NB.
+NB. monad:  location_yellowstone uuIgnore
+NB.
+NB.   location_yellowstone 0  NB. set location
+NB.   iau_today 0             NB. uses set location with current date
+NB.
+NB.   NB. uses location with set date
+NB.   (location_yellowstone 0) iau_today 0
+
+NB. date of mom's death
+ymd=. 2013 5 7
+
+NB. longitude, latitude with standard signs 
+OBSLOCATION_riseset_=: _110.82792 44.46057
+
+UTCOFFSET_riseset_=: 6.0   NB. MST time zone
+LIMITMAG_riseset_=:  6.0   NB. stellar magnitude
+LIMITHORZ_riseset_=: 10    NB. degrees above horizon
+
+ymd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ
 )
 
 
@@ -916,11 +995,11 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230328j184103
+NB. (riseset) interface word(s): 20230329j113141
 NB. ----------------------------
-NB. iau_tonight  NB. named IAU stars visible tonight
-NB. loadstars    NB. loads riseset star data
-NB. riseset      NB. rise, transit, set times of stars
+NB. iau_today  NB. named IAU stars rising/setting today
+NB. loadstars  NB. loads riseset star data
+NB. riseset    NB. rise, transit, set times of stars
 )
 
 NB. smoutput 'NB. vmd: ' , ,'0,p<; >q<; >0,0' (8!:2) VMDriseset

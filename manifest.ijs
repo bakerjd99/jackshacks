@@ -11,6 +11,7 @@ how to use the corresponding ijs script. JOD is not required to
 run any of these scripts. You load jackshacks with commands like:
 
 load '~addons/jacks/ipynb.ijs'
+load '~addons/jacks/riseset.ijs'
 
 The subdirectory (testdata) contains sample input files. One of
 the files (small_mirror.db) is a SQLite database that contains
@@ -19,7 +20,7 @@ geotagged image metadata used by (gpxutils.ijs). Other files in
 jackshacks scripts.
 )
 
-VERSION=: '0.7.0'
+VERSION=: '0.8.0'
 
 RELEASE=: ''
 
