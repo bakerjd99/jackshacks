@@ -48,7 +48,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.8.0';15;'29 Mar 2023 11:31:41'
+VMDriseset=:'0.8.5';2;'29 Mar 2023 13:12:16'
 
 NB. all zero, first, second, ... nth differences of nl: alldifs ?.10#100
 alldifs=:([: >: [: i. [: - #) {.&.> [: <"1 (}. - }:)^:(i.@#@[)
@@ -440,33 +440,47 @@ NB.*loadstars v-- loads riseset star data.
 NB.
 NB. monad:  blIAU_Nav =. loadstars uuIgnore
 NB.
-NB.   NB. needs (futs,utils) dictionaries
-NB.   od;: 'futs utils' [ 3 od'' [ require 'general/jod'
 NB.   loadstars 0
 NB.   
 NB. dyad:  blIAU_Nav=. pa loadstars uuIgnore
 NB.
-NB.   1 loadstars 0 NB. define columns
-NB.   loadstars~ 1  NB. shorter idiom
+NB.   0 loadstars 0 NB. files
+NB.   1 loadstars 0 NB. JOD
+NB.
+NB.   loadstars~ 0  NB. idiom files
+NB.   loadstars~ 1  NB. idiom JOD
+NB.
+NB.   2 loadstars 0 NB. files - define columns
 
 0 loadstars y
 :
-NB. load IAU stars !(*)=. get
-ciau=. ; {: , > {: MACRO_ajod_ get 'iau_named_stars_2022_txt'
-ciau=. cold_iau_named_stars parse_iau_named_stars ciau
+'invalid option' assert x e. 0 1 2
 
-NB. load navigation stars
-cnavs=.  parsetd (; {: , > {: MACRO_ajod_ get 'Navigation_Stars_txt') -. CR
+if. x e. 0 2 do.
+  NB. load star data from addon directory !(*)=. jpath
+  paddon=. jpath '~addons/jacks/testdata/'
+  ciau=. read paddon,'iau_named_stars_2022.txt'
+  cnavs=. read paddon,'Navigation_Stars.txt'
+elseif. x-:1 do.
+  NB. load star data from JOD (futs) !(*)=. get od require
+  rc=. od ;:'futs utils' [ 3 od '' [ require 'general/jod'
+  ciau=. ; {: , > {: MACRO_ajod_ get 'iau_named_stars_2022_txt'
+  cnavs=. ; {: , > {: MACRO_ajod_ get 'Navigation_Stars_txt'
+end.
+
+ciau=. cold_iau_named_stars parse_iau_named_stars ciau
+cnavs=.  parsetd cnavs -. CR
 cnavs=. (0 { cnavs) ,.  <"1 |: }. cnavs
 'star column overlap' assert 0 = #(0 {"1 cnavs) ([ -. -.) 0 {"1 ciau
 
 NB. define columns - override mixed assignments (<:)=:
-if. x -: 1 do.
+if. x-:2 do.
   (0 {"1 ciau)=: 1 {"1 ciau
   (0 {"1 cnavs)=: 1 {"1 cnavs
+  (<ciau),(<cnavs),<(0 {"1 ciau),0 {"1 cnavs
+else.
+  (<ciau),<cnavs
 end.
-
-(<ciau),<cnavs
 )
 
 
@@ -511,7 +525,7 @@ NB.   (location_uluru 0) iau_today 0
 NB. date of Uluru star party diner
 ymd=. 2022 10 19
 
-NB. lat,lon with standard signs 
+NB. longitude, latitude with standard signs 
 OBSLOCATION_riseset_=: 131.01941 _25.34301
 
 UTCOFFSET_riseset_=: _9.5   NB. time zone
@@ -821,6 +835,9 @@ b <;._1"1 y
 NB. parse TAB delimited table text - see long document
 parsetd=:[: <;._2&> (a.{~9) ,&.>~ [: <;._2 [: (] , ((10{a.)"_ = {:) }. (10{a.)"_) (13{a.) -.~ ]
 
+NB. reads a file as a list of bytes
+read=:1!:1&(]`<@.(32&>@(3!:0)))
+
 NB. radians from degrees
 rfd=:*&0.0174532925199432955
 
@@ -893,7 +910,7 @@ NB. (B) latitude,  north positive
 obj=. obj ,"0 1 a:,a:  NB. result table
 
 NB. dynamical time ΔT in fractional days NOTE: ΔT is not 
-NB. going to change a lot over the interpolation period
+NB. going to change a lot over the interpolation period  !(*)=. nc
 if. 0=nc<'DeltaTsOveride_riseset_' do.
   dTfd=. DeltaTsOveride_riseset_ % DAYSECS 
 else.
@@ -995,7 +1012,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230329j113141
+NB. (riseset) interface word(s): 20230329j131216
 NB. ----------------------------
 NB. iau_today  NB. named IAU stars rising/setting today
 NB. loadstars  NB. loads riseset star data
