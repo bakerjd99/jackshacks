@@ -20,7 +20,7 @@ geotagged image metadata used by (gpxutils.ijs). Other files in
 jackshacks scripts.
 )
 
-VERSION=: '0.8.0'
+VERSION=: '0.8.5'
 
 RELEASE=: ''
 
@@ -35,6 +35,8 @@ ipynb.ijs
 ipynb.pdf
 riseset.ijs
 riseset.pdf
+riseset_notebook.ipynb
+riseset_notebook.pdf
 testdata/_DSC8471.NEF.xmp
 testdata/gps_oz_nz_2022.txt
 testdata/small_mirror.db

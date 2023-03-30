@@ -48,7 +48,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.8.5';2;'29 Mar 2023 13:12:16'
+VMDriseset=:'0.8.5';5;'29 Mar 2023 22:29:55'
 
 NB. all zero, first, second, ... nth differences of nl: alldifs ?.10#100
 alldifs=:([: >: [: i. [: - #) {.&.> [: <"1 (}. - }:)^:(i.@#@[)
@@ -548,8 +548,7 @@ NB.
 NB.   NB. uses location with set date
 NB.   (location_yellowstone 0) iau_today 0
 
-NB. date of mom's death
-ymd=. 2013 5 7
+ymd=. 2013 5 7  NB. mom
 
 NB. longitude, latitude with standard signs 
 OBSLOCATION_riseset_=: _110.82792 44.46057
@@ -1012,7 +1011,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230329j131216
+NB. (riseset) interface word(s): 20230329j222955
 NB. ----------------------------
 NB. iau_today  NB. named IAU stars rising/setting today
 NB. loadstars  NB. loads riseset star data
