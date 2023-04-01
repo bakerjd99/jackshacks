@@ -2,16 +2,22 @@ NB.*riseset s-- compute rise, transit and set times of IAU named stars.
 NB.
 NB. verbatim: interface word(s):
 NB. ------------------------------------------------------------------------------
+NB.  fmt_today - format today verbs result
 NB.  iau_today - named IAU stars rising/setting today
 NB.  loadstars - loads riseset star data
+NB.  nav_today - named navigation stars rising/setting today
 NB.  riseset   - rise, transit, set times of stars
 NB.
 NB. created: 2023mar09
 NB. changes: ---------------------------------------------------------------------
 NB. 23mar29 (iau_tonight) renamed (iau_today) 
 NB. 23mar29 various location setting verbs (location_uluru) added
+NB. 23mar30 (nav_today) added
+NB. 23apr01 (fmt_today) added
 
 coclass 'riseset'
+
+(9!:11) 16 NB. high print precision
 NB.*end-header
 
 NB. Byte Order Mark: UTF-8 EF,BB,BF (hex) or 239 187 191 (dec) 
@@ -24,7 +30,13 @@ NB. seconds per day
 DAYSECS=:86400
 
 NB. interface words (IFACEWORDSriseset) group
-IFACEWORDSriseset=:<;._1 ' iau_today loadstars riseset'
+IFACEWORDSriseset=:<;._1 ' fmt_today iau_today loadstars nav_today riseset'
+
+NB. current Julian date
+JULIAN=:2460030.5
+
+NB. line feed character
+LF=:10{a.
 
 NB. horizon limit in degrees
 LIMITHORZ=:20
@@ -39,7 +51,7 @@ NB. observer latitude longitude, west longitudes negative
 OBSLOCATION=:_116.375956000000002 43.6467749999999981
 
 NB. root words (ROOTWORDSriseset) group      
-ROOTWORDSriseset=:<;._1 ' IFACEWORDSriseset ROOTWORDSriseset VMDriseset fdfrhms iau_today location_home location_uluru location_yellowstone'
+ROOTWORDSriseset=:<;._1 ' IFACEWORDSriseset ROOTWORDSriseset VMDriseset fmt_today iau_today location_home location_uluru location_yellowstone nav_today'
 
 NB. standard altitude stars - compensates for horizon atmospheric refraction
 STDALTITUDE=:0.566699999999999982
@@ -48,7 +60,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.8.5';5;'29 Mar 2023 22:29:55'
+VMDriseset=:'0.9.0';7;'01 Apr 2023 12:28:47'
 
 NB. all zero, first, second, ... nth differences of nl: alldifs ?.10#100
 alldifs=:([: >: [: i. [: - #) {.&.> [: <"1 (}. - }:)^:(i.@#@[)
@@ -119,7 +131,7 @@ NB. ratios.  Based on a  PASCAL  function from  Astronomy on  the
 NB. Personal   Computer   by   Montenbruck   and   Pfleger   ISBN
 NB. 0-387-52754-0 pg. 9.
 NB.
-NB. Result is between _180 <: atn2 <: 180 degrees
+NB. Result is between _180 <: atan2 <: 180 degrees
 NB.
 NB. monad:  fl =. atan2 flYX
 NB.
@@ -191,6 +203,9 @@ cos=:2&o.
 
 NB. cosine degrees
 cosd=:cos@rfd
+
+NB. character table to newline delimited list
+ctl=:}.@(,@(1&(,"1)@(-.@(*./\."1@(=&' '@])))) # ,@((10{a.)&(,"1)@]))
 
 NB. decimal degrees from degrees, minutes, seconds - inverse (dmsfrdd)
 ddfrdms=:(60"_ #. ]) % 3600"_
@@ -317,8 +332,30 @@ dfr=:*&57.2957795130823229
 NB. degrees, minutes, seconds from decimal degrees - inverse (ddfrdms)
 dmsfrdd=:<. (,.) 60 60 #: 3600 * 1 | ,
 
-NB. fractional day from hms: 0.80625 = fdfrhms 19 21 0
-fdfrhms=:24 %~ (60"_ #. ]) % 3600"_
+
+fmt_today=:3 : 0
+
+NB.*fmt_today v-- format today verbs result.
+NB.
+NB. monad:  cl =. fmt_today (bt ; fl)
+NB.
+NB.   fmt_today nav_today 0
+NB.   fmt_today (location_yellowstone~ 1935 7 6) iau_today 0
+
+'Rs cParms'=. y
+
+NB. calc parameters
+hdr=. <;._1' Mag-Lim Above-Horz Julian ΔT Longitude Latitude Year Month Day.dd'  
+cParms=. ctl ": <(": ,. cParms) ,. ' ' ,. >hdr
+
+NB. rise/set - sorted by transit time
+Rs=. >&.> <"1 |: Rs
+Rs=. (('5.1'&(8!:2)@,.) &.> 2 { Rs) (2)} Rs
+Rs=. ('3.0'&(8!:2)&.> 3 { Rs) (3)} Rs
+Rs=. ctl ": Rs ,:~ <;._1' Name Designation Tr-Alt-Deg Tr-24-HrMin'
+
+cParms,LF,Rs
+)
 
 NB. fractional centuries from epoch J2000 Meeus pg. 83: gT0jd julfrcal 1957 10 4.81
 gT0jd=:36525 %~ 2451545. -~ ]
@@ -334,44 +371,30 @@ iau_today=:3 : 0
 
 NB.*iau_today v-- named IAU stars rising/setting today.
 NB.
-NB. monad:  bt =. iau_today uuIgnore
+NB. monad:  (bt ; flParms) =. iau_today uuIgnore
 NB.
 NB.   iau_today 0
 NB.
-NB. dyad:  bt =. blYmd_LB_U0_LMAG_LHORZ iau_today uuIgnore
+NB. dyad:  (bt ; flParms) =. blYmd_LB_U0_LMAG_LHORZ iau_today uuIgnore
 NB.
-NB.   NB. date of Uluru star party diner
-NB.   YMD=. 2022 10 19
-NB.   ULURU=. 131.01941 _25.34301
-NB.   UTC=. _9.5 
-NB.   LMAG=. 6.0
-NB.   LHORZ=. 5
-NB.   (YMD;ULURU;UTC;LMAG;LHORZ) iau_today 0
+NB.   'Riseset cParms'=. (location_yellowstone~ 1935 7 6) iau_today 0
 
-((3 {. 6!:0 '');OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ) iau_today y
+jd=. julfrcal ymd=. 3 {. 6!:0 ''
+(ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ) iau_today y
 :
-NB. date, location, UTC offset, magnitude, horizon
-'YMD LB UO LMAG LHORZ'=. x
+NB. date, julian, location, UTC timezone, magnitude, horizon
+'YMD JD LB UO LMAG LHORZ'=. x
 
-NB. IAU star data
-({."1 IAU)=. {:"1 IAU [ 'IAU NAV'=. loadstars 0
+NB. star data
+'IAU NAV'=. loadstars 0
+({."1 NAV)=. {:"1 NAV [ ({."1 IAU)=. {:"1 IAU
 
-NB. !(*)=. Vmag IAU_Name
-NB. brighter than limiting magnitude
-stars=. (LMAG > Vmag) # IAU_Name
-Rsiau=. (YMD;UO;LB) riseset stars
+NB. brighter magnitude limit !(*)=. Vmag IAU_Name Designation
+'Rs cParms'=. x today_calc (LMAG > Vmag) # IAU_Name
 
-NB. retain rising setting - circumpolar NIMP
-Rsiau=. Rsiau #~ -. ; 1 {"1 Rsiau
-
-NB. name ,. transit altitude, hour minutes 
-Rsiau=. (0 {"1 Rsiau) ,. (0 2 3)&{&.> 1&{&.> 2 {"1 Rsiau
-
-NB. retain above local horizon
-Rsiau=. Rsiau #~ LHORZ < 0&{&> 1 {"1 Rsiau
-
-NB. sort by transit time
-Rsiau {~ /: }."1 > 1 {"1 Rsiau
+NB. include Designation names
+Rs=. 1 0 2 3 {"1 Rs ,.~ (IAU_Name i. 0 {"1 Rs){Designation
+Rs;cParms
 )
 
 
@@ -488,16 +511,26 @@ location_home=:3 : 0
 
 NB.*location_home v-- set parameters for "home" location.
 NB.
-NB. monad:  location_home uuIgnore
+NB. monad:  bl =. location_home uuIgnore
 NB.
-NB.   location_home 0  NB. set location
-NB.   iau_today 0      NB. uses set location with current date
+NB.   location_home 0 
+NB.   NB. uses location with current date 
+NB.   fmt_today iau_today 0      
 NB.
-NB.   NB. uses location with set date
+NB. dyad:  bl =. flYmfd location_home uuIgnore
+NB.
+NB.   NB. uses location with home date
 NB.   (location_home 0) iau_today 0
+NB.   (location_home 0) nav_today 0
+NB.
+NB.   NB. arbitrary dates for location
+NB.   fmt_today (1712 3 15.34 location_home 0) nav_today 0
+NB.   fmt_today (location_home~ 1933 9 25.75) iau_today 0
 
 NB. test date https://www.almanac.com/astronomy/bright-stars/zipcode/83646/2023-03-27
-ymd=. 2023 3 27
+2023 3 27 location_home y
+:
+JULIAN_riseset_=: julfrcal ymd=. x
 
 NB. longitude, latitude with standard signs 
 OBSLOCATION_riseset_=: _116.375956 43.646775  NB. Meridian 
@@ -506,7 +539,7 @@ UTCOFFSET_riseset_=: 6.0   NB. MST time zone
 LIMITMAG_riseset_=:  3.0   NB. stellar magnitude
 LIMITHORZ_riseset_=: 20    NB. degrees above horizon
 
-ymd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ
+ymd;JULIAN;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ
 )
 
 
@@ -516,14 +549,23 @@ NB.*location_uluru v-- set parameters for Uluru location.
 NB.
 NB. monad:  location_uluru uuIgnore
 NB.
-NB.   location_uluru 0  NB. set location
-NB.   iau_today 0       NB. uses set location with current date
+NB.   location_uluru 0  
+NB.   NB. uses location with current date
+NB.   iau_today 0       
 NB.
-NB.   NB. uses location with set date
+NB. dyad:  bl =. flYmfd location_uluru uuIgnore
+NB.
+NB.   NB. uses location with uluru date
 NB.   (location_uluru 0) iau_today 0
+NB.
+NB.   NB. arbitrary dates for location
+NB.   fmt_today (1712 3 15.34 location_uluru 0) nav_today 0 
+NB.   fmt_today (location_uluru~ 1933 9 25.75) iau_today 0
 
 NB. date of Uluru star party diner
-ymd=. 2022 10 19
+2022 10 19 location_uluru y
+:
+JULIAN_riseset_=: julfrcal ymd=. x
 
 NB. longitude, latitude with standard signs 
 OBSLOCATION_riseset_=: 131.01941 _25.34301
@@ -532,7 +574,7 @@ UTCOFFSET_riseset_=: _9.5   NB. time zone
 LIMITMAG_riseset_=: 6.0     NB. stellar magnitude
 LIMITHORZ_riseset_=: 5      NB. degrees above horizon
 
-ymd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ
+ymd;JULIAN;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ
 )
 
 
@@ -542,13 +584,22 @@ NB.*location_yellowstone v-- set parameters for Old Faithful location.
 NB.
 NB. monad:  location_yellowstone uuIgnore
 NB.
-NB.   location_yellowstone 0  NB. set location
-NB.   iau_today 0             NB. uses set location with current date
+NB.   location_yellowstone 0  
+NB.   NB. uses location with current date
+NB.   iau_today 0             
 NB.
-NB.   NB. uses location with set date
+NB. dyad:  bl =. flYmfd location_yellowstone uuIgnore
+NB.
+NB.   NB. uses location with yellowstone date
 NB.   (location_yellowstone 0) iau_today 0
+NB.
+NB.   NB. arbitrary dates for location
+NB.   fmt_today (1712 3 15.34 location_yellowstone 0) nav_today 0 
+NB.   fmt_today (location_yellowstone~ 1933 9 25.75) iau_today 0
 
-ymd=. 2013 5 7  NB. mom
+2013 5 7 location_yellowstone y
+:
+JULIAN_riseset_=: julfrcal ymd=. x
 
 NB. longitude, latitude with standard signs 
 OBSLOCATION_riseset_=: _110.82792 44.46057
@@ -557,7 +608,7 @@ UTCOFFSET_riseset_=: 6.0   NB. MST time zone
 LIMITMAG_riseset_=:  6.0   NB. stellar magnitude
 LIMITHORZ_riseset_=: 10    NB. degrees above horizon
 
-ymd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ
+ymd;JULIAN;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ
 )
 
 
@@ -642,6 +693,34 @@ NB.   JD=. julfrcal 1987 4,10 + fdfrhms 19 21 0
 NB.   meansidjd0 JD
 
 (gT0jd y) meansid0 y
+)
+
+
+nav_today=:3 : 0
+
+NB.*nav_today v-- named navigation stars rising/setting today.
+NB.
+NB. monad:  (bt ; flParms) =. nav_today uuIgnore
+NB.
+NB.   nav_today 0
+NB.
+NB. dyad:  (bt ; flParms) =. blYmd_LB_U0_LMAG_LHORZ nav_today uuIgnore
+NB.
+NB.   'Riseset cParms'=. (location_yellowstone~ 1935 7 6) nav_today 0
+
+jd=. julfrcal ymd=. 3 {. 6!:0 ''
+(ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ) nav_today y
+:
+NB. star data
+'IAU NAV'=. loadstars 0
+({."1 NAV)=. {:"1 NAV [ ({."1 IAU)=. {:"1 IAU
+
+NB. !(*)=. Nav_Star_Name IAU_Name Designation
+'Rs cParms'=. x today_calc Nav_Star_Name
+
+NB. include Designation names
+Rs=. 1 0 2 3 {"1 Rs ,.~ (IAU_Name i. 0 {"1 Rs){Designation
+Rs;cParms
 )
 
 NB. normalize negative degree sidereal time: nnth0 -1677831.2621266
@@ -845,7 +924,7 @@ riseset=:4 : 0
 
 NB.*riseset v-- rise, transit, set times of IAU named stars.
 NB.
-NB. dyad:  bt=. blYMD_UO_LB_AOBJ riseset blclStarNames
+NB. dyad:  (btRs ; flParms) =. blYMD_UO_LB_AOBJ riseset blclStarNames
 NB. 
 NB.   LB=.  _116.375956 43.646775    NB. Meridian 
 NB.   YMD=. 2023 3 27
@@ -898,7 +977,7 @@ NB.*riseset_calc v-- rise, transit, set times of stars.
 NB.
 NB. Main rise/set calculations. Argument (y) set in (riseset).
 NB.
-NB. monad:  bt =. riseset_calc blYMD_LB_OBJ_RA_Dec
+NB. monad:  (btRs ; flParms) =. riseset_calc blYMD_LB_OBJ_RA_Dec
 
 'ymd LB obj ra dec'=. ,&.> y
 
@@ -910,14 +989,14 @@ obj=. obj ,"0 1 a:,a:  NB. result table
 
 NB. dynamical time ΔT in fractional days NOTE: ΔT is not 
 NB. going to change a lot over the interpolation period  !(*)=. nc
-if. 0=nc<'DeltaTsOveride_riseset_' do.
-  dTfd=. DeltaTsOveride_riseset_ % DAYSECS 
-else.
-  dTfd=. (,/deltaT0 deltaTdy ymd) % DAYSECS
+if. 0=nc<'DeltaTsOveride_riseset_' do. dTs=. DeltaTsOveride_riseset_  
+else. 
+  dTs=. ,/deltaT0 deltaTdy ymd
 end. 
+dTfd=. dTs%DAYSECS
 
 NB. apparent sidereal time Greenwich at 0h in degrees
-th0=. ,/ddfrdms 15 * apparsidjd0 julfrcal ymd
+th0=. ,/ddfrdms 15 * apparsidjd0 JD=. julfrcal ymd
 
 NB. TD times ΔT + UT = TD
 TD=. (2 {. ymd),"1 0  (_1 0 1 + {:ymd) + dTfd
@@ -968,8 +1047,11 @@ drs=.  rsx { (h - h0) % 360 * (cosd decx{rda)*(cosd B)*sind H
 dltm=. drs rsx} dltm
 m=. m + dltm
 
+NB. calc parameters Julian date, ΔT, Longitude, Latitude, ymfd
+cParms=. JD,dTs,(-L),B,ymd
+
 NB. objects, above/below, altitudes, fractional day UT, UT hours/minutes
-(<"2 (,."1 ] 0.5 round h) ,"1 (,."1 m) ,"1 ] 1 round hmfrds DAYSECS*m) (<ix;2)} obj
+cParms ;~ (<"2 (,."1 ] 0.5 round h) ,"1 (,."1 m) ,"1 ] 1 round hmfrds DAYSECS*m) (<ix;2)} obj
 )
 
 NB. round (y) to nearest (x) (e.g. 1000 round 12345)
@@ -983,6 +1065,35 @@ sind=:sin@rfd
 
 NB. session manager output
 smoutput=:0 0 $ 1!:2&2
+
+
+today_calc=:4 : 0
+
+NB.*today_calc v-- named (y) stars rising/setting today.
+NB.
+NB. dyad:  (bt ; flParms) =. blYmd_LB_U0_LMAG_LHORZ iau_today uuIgnore
+NB.
+NB.   stars=. 'Algol';'Rigel';'Spica'
+NB.   'Riseset cParms'=. (location_uluru 0) today_calc stars
+
+NB. date, julian, location, UTC timezone, magnitude, horizon
+'YMD JD LB UO LMAG LHORZ'=. x
+
+'Rsiau cParms'=. (YMD;UO;LB) riseset y
+
+NB. retain rising setting - circumpolar NIMP
+Rsiau=. Rsiau #~ -. ; 1 {"1 Rsiau
+
+NB. name ,. transit altitude, hour minutes 
+ahm=. 1&{&.> 2 {"1 Rsiau
+Rsiau=. (0 {"1 Rsiau) ,. (0 {&.> ahm) ,. (<2 3){&.> ahm
+
+NB. retain above local horizon
+Rsiau=. Rsiau #~ LHORZ < 0&{&> 1 {"1 Rsiau
+
+NB. sort by transit time
+(LMAG,LHORZ,cParms) ;~ Rsiau {~ /: >2 {"1 Rsiau
+)
 
 
 zetzthT0=:3 : 0
@@ -1011,10 +1122,12 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230329j222955
+NB. (riseset) interface word(s): 20230401j122847
 NB. ----------------------------
+NB. fmt_today  NB. format today verbs result
 NB. iau_today  NB. named IAU stars rising/setting today
 NB. loadstars  NB. loads riseset star data
+NB. nav_today  NB. named navigation stars rising/setting today
 NB. riseset    NB. rise, transit, set times of stars
 )
 
@@ -1023,8 +1136,3 @@ NB. smoutput 'NB. vmd: ' , ,'0,p<; >q<; >0,0' (8!:2) VMDriseset
 cocurrent 'base'
 coinsert  'riseset'
 
-NB. high print precision
-(9!:11) 16
-
-NB. test stars
-NB. smoutput loadstars 0
