@@ -20,7 +20,7 @@ geotagged image metadata used by (gpxutils.ijs). Other files in
 jackshacks scripts.
 )
 
-VERSION=: '0.8.5'
+VERSION=: '0.9.0'
 
 RELEASE=: ''
 
@@ -44,5 +44,6 @@ testdata/small_mirror.kml
 testdata/10_best_us_star_gazing.csv
 testdata/iau_named_stars_2022.txt
 testdata/Navigation_Stars.txt
+testdata/Navigation_Stars.skylist
 testdata/Bright_Stars_Meridian_Almanac_23mar27.md
 )
