@@ -2,11 +2,12 @@ NB.*riseset s-- compute rise, transit and set times of IAU named stars.
 NB.
 NB. verbatim: interface word(s):
 NB. ------------------------------------------------------------------------------
-NB.  fmt_today - format today verbs result
-NB.  iau_today - named IAU stars rising/setting today
-NB.  loadstars - loads riseset star data
-NB.  nav_today - named navigation stars rising/setting today
-NB.  riseset   - rise, transit, set times of stars
+NB.  fmt_today  - format today verbs result
+NB.  iau_today  - named IAU stars rising/setting today
+NB.  loadstars  - loads riseset star data
+NB.  nav_today  - named navigation stars rising/setting today
+NB.  navdaylist - sky safari 6_0 observing list of today's navigation stars
+NB.  riseset    - rise, transit, set times of stars
 NB.
 NB. created: 2023mar09
 NB. changes: ---------------------------------------------------------------------
@@ -14,6 +15,7 @@ NB. 23mar29 (iau_tonight) renamed (iau_today)
 NB. 23mar29 various location setting verbs (location_uluru) added
 NB. 23mar30 (nav_today) added
 NB. 23apr01 (fmt_today) added
+NB. 23apr06 (navdaylist) added
 
 coclass 'riseset'
 
@@ -30,7 +32,7 @@ NB. seconds per day
 DAYSECS=:86400
 
 NB. interface words (IFACEWORDSriseset) group
-IFACEWORDSriseset=:<;._1 ' fmt_today iau_today loadstars nav_today riseset'
+IFACEWORDSriseset=:<;._1 ' fmt_today iau_today loadstars nav_today navdaylist riseset'
 
 NB. current Julian date
 JULIAN=:2460030.5
@@ -54,7 +56,7 @@ NB. observer latitude longitude, west longitudes negative
 OBSLOCATION=:_116.375956000000002 43.6467749999999981
 
 NB. root words (ROOTWORDSriseset) group      
-ROOTWORDSriseset=:<;._1 ' IFACEWORDSriseset ROOTWORDSriseset VMDriseset fmt_today iau_today location_home location_uluru location_yellowstone nav_today'
+ROOTWORDSriseset=:<;._1 ' IFACEWORDSriseset ROOTWORDSriseset VMDriseset fmt_today iau_today location_uluru location_yellowstone navdaylist'
 
 NB. standard altitude stars - compensates for horizon atmospheric refraction
 STDALTITUDE=:0.566699999999999982
@@ -63,7 +65,10 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.9.5';01;'05 Apr 2023 12:31:48'
+VMDriseset=:'0.9.6';2;'06 Apr 2023 15:00:09'
+
+NB. retains string after first occurrence of (x)
+afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
 
 NB. all zero, first, second, ... nth differences of nl: alldifs ?.10#100
 alldifs=:([: >: [: i. [: - #) {.&.> [: <"1 (}. - }:)^:(i.@#@[)
@@ -176,6 +181,9 @@ r=. (-yl0{r) (yl0)} r
 
 r
 )
+
+NB. retains string before first occurrence of (x)
+beforestr=:] {.~ 1&(i.~)@([ E. ])
 
 NB. boxes open nouns
 boxopen=:<^:(L. = 0:)
@@ -459,6 +467,9 @@ f=. f + b [ j=. j - b              NB.  F=F+1: J=J-1
 f + j
 )
 
+NB. left justify table
+ljust=:' '&$: :(] |."_1~ i."1&0@(] e. [))
+
 
 loadstars=:3 : 0
 
@@ -726,6 +737,42 @@ NB. !(*)=. Nav_Star_Name IAU_Name Designation
 NB. include Designation names
 Rs=. 1 0 2 3 {"1 Rs ,.~ (IAU_Name i. 0 {"1 Rs){Designation
 Rs;lName;cParms
+)
+
+
+navdaylist=:3 : 0
+
+NB.*navdaylist v--  sky safari  6_0  observing  list  of  today's navigation stars.
+NB.
+NB. The files created by  this  verb can  be loaded into the  Sky
+NB. Safari iOS and Mac apps.
+NB.
+NB. monad:  cl =. navdaylist uuIgnore
+NB.
+NB.   navhome=. navdaylist 0
+NB.   navhome write jpath '~JODIMEX/Navigation_Stars_Home.skylist'
+
+NB. j profile !(*)=. jpath
+skl=. read jpath'~addons/jacks/testdata/Navigation_Stars.skylist'
+'st loc cParms'=. nav_today 0 [ location_home 0
+
+NB. skylist header
+cst=. 'SortedBy=Default Order'
+hdr=. cst ((,&LF)@[ ,~ beforestr) skl
+
+NB. cut skylist objects
+sob=. (] <;.1~ 'SkyObject=BeginObject' E. ]) cst afterstr skl
+
+NB. retain objects that match star and hdr names
+b=. +./ (0 {"1 st) +./@E.&>"0 1 sob
+sob=. sob #~ b *. +./ (1 {"1 st) +./@E.&>"0 1 sob
+
+NB. reset sort order
+sob=. ];._2 tlf ;sob
+ix=. I. +./"1 (,:'DefaultIndex=') E. sob
+ns=. '='&beforestr"1 ix{sob
+ns=. ns ,. '=' ,. ljust ": ,. i. #ns
+hdr,ctl >(<"1 ns) (ix)} <"1 sob
 )
 
 NB. normalize negative degree sidereal time: nnth0 -1677831.2621266
@@ -1074,6 +1121,9 @@ sind=:sin@rfd
 NB. session manager output
 smoutput=:0 0 $ 1!:2&2
 
+NB. appends trailing line feed character if necessary
+tlf=:] , ((10{a.)"_ = {:) }. (10{a.)"_
+
 
 today_calc=:4 : 0
 
@@ -1130,17 +1180,17 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230405j123148
+NB. (riseset) interface word(s): 20230406j150009
 NB. ----------------------------
-NB. fmt_today  NB. format today verbs result
-NB. iau_today  NB. named IAU stars rising/setting today
-NB. loadstars  NB. loads riseset star data
-NB. nav_today  NB. named navigation stars rising/setting today
-NB. riseset    NB. rise, transit, set times of stars
+NB. fmt_today   NB. format today verbs result
+NB. iau_today   NB. named IAU stars rising/setting today
+NB. loadstars   NB. loads riseset star data
+NB. nav_today   NB. named navigation stars rising/setting today
+NB. navdaylist  NB. sky safari 6_0 observing list of today's navigation stars
+NB. riseset     NB. rise, transit, set times of stars
 )
 
 NB. smoutput 'NB. vmd: ' , ,'0,p<; >q<; >0,0' (8!:2) VMDriseset
 
 cocurrent 'base'
 coinsert  'riseset'
-
