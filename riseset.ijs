@@ -65,7 +65,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.9.6';2;'06 Apr 2023 15:00:09'
+VMDriseset=:'0.9.6';3;'06 Apr 2023 15:23:02'
 
 NB. retains string after first occurrence of (x)
 afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
@@ -382,18 +382,18 @@ iau_today=:3 : 0
 
 NB.*iau_today v-- named IAU stars rising/setting today.
 NB.
-NB. monad:  (bt ; flParms) =. iau_today uuIgnore
+NB. monad:  (bt ; clLoc ; flParms) =. iau_today uuIgnore
 NB.
 NB.   iau_today 0
 NB.
-NB. dyad:  (bt ; flParms) =. blYmd_LB_U0_LMAG_LHORZ iau_today uuIgnore
+NB. dyad:  (bt ; clLoc ; flParms) =. blYmd_LB_U0_LMAG_LHORZ_LOC iau_today uuIgnore
 NB.
-NB.   'Riseset cParms'=. (location_yellowstone~ 1935 7 6) iau_today 0
+NB.   'Riseset Location cParms'=. (location_yellowstone~ 1935 7 6) iau_today 0
 
 jd=. julfrcal ymd=. 3 {. 6!:0 ''
 (ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME) iau_today y
 :
-NB. date, julian, location, UTC timezone, magnitude, horizon
+NB. date, julian, location, UTC timezone, magnitude, horizon, location
 'YMD JD LB UO LMAG LHORZ LOCNAME'=. x
 
 NB. star data
@@ -716,13 +716,13 @@ nav_today=:3 : 0
 
 NB.*nav_today v-- named navigation stars rising/setting today.
 NB.
-NB. monad:  (bt ; flParms) =. nav_today uuIgnore
+NB. monad:  (bt ; clLoc ; flParms) =. nav_today uuIgnore
 NB.
 NB.   nav_today 0
 NB.
-NB. dyad:  (bt ; flParms) =. blYmd_LB_U0_LMAG_LHORZ nav_today uuIgnore
+NB. dyad:  (bt ; clLoc ; flParms) =. blYmd_LB_U0_LMAG_LHORZ_LOC nav_today uuIgnore
 NB.
-NB.   'Riseset cParms'=. (location_yellowstone~ 1935 7 6) nav_today 0
+NB.   'Riseset Location cParms'=. (location_yellowstone~ 1935 7 6) nav_today 0
 
 jd=. julfrcal ymd=. 3 {. 6!:0 ''
 (ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME) nav_today y
@@ -1180,7 +1180,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230406j150009
+NB. (riseset) interface word(s): 20230406j152302
 NB. ----------------------------
 NB. fmt_today   NB. format today verbs result
 NB. iau_today   NB. named IAU stars rising/setting today
