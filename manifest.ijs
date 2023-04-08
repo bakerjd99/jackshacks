@@ -37,6 +37,7 @@ riseset.ijs
 riseset.pdf
 riseset_notebook.ipynb
 riseset_notebook.pdf
+testdata/babylonian_normal_stars.csv
 testdata/_DSC8471.NEF.xmp
 testdata/gps_oz_nz_2022.txt
 testdata/small_mirror.db
