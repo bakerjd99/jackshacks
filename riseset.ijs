@@ -2,6 +2,7 @@ NB.*riseset s-- compute rise, transit and set times of IAU named stars.
 NB.
 NB. verbatim: interface word(s):
 NB. ------------------------------------------------------------------------------
+NB.  baby_today - named Babylonian stars rising/setting today
 NB.  fmt_today  - format today verbs result
 NB.  iau_today  - named IAU stars rising/setting today
 NB.  loadstars  - loads riseset star data
@@ -16,14 +17,12 @@ NB. 23mar29 various location setting verbs (location_uluru) added
 NB. 23mar30 (nav_today) added
 NB. 23apr01 (fmt_today) added
 NB. 23apr06 (navdaylist) added
+NB. 23apr08 (baby_today) added
 
 coclass 'riseset'
 
 (9!:11) 16 NB. high print precision
 NB.*end-header
-
-NB. Byte Order Mark: UTF-8 EF,BB,BF (hex) or 239 187 191 (dec) 
-BOM=:239 187 191{a.
 
 NB. carriage return character
 CR=:13{a.
@@ -32,7 +31,7 @@ NB. seconds per day
 DAYSECS=:86400
 
 NB. interface words (IFACEWORDSriseset) group
-IFACEWORDSriseset=:<;._1 ' fmt_today iau_today loadstars nav_today navdaylist riseset'
+IFACEWORDSriseset=:<;._1 ' baby_today fmt_today iau_today loadstars nav_today navdaylist riseset'
 
 NB. current Julian date
 JULIAN=:2460030.5
@@ -56,7 +55,7 @@ NB. observer latitude longitude, west longitudes negative
 OBSLOCATION=:_116.375956000000002 43.6467749999999981
 
 NB. root words (ROOTWORDSriseset) group      
-ROOTWORDSriseset=:<;._1 ' IFACEWORDSriseset ROOTWORDSriseset VMDriseset fmt_today iau_today location_uluru location_yellowstone navdaylist'
+ROOTWORDSriseset=:<;._1 ' IFACEWORDSriseset ROOTWORDSriseset VMDriseset baby_today fmt_today iau_today location_uluru location_yellowstone navdaylist'
 
 NB. standard altitude stars - compensates for horizon atmospheric refraction
 STDALTITUDE=:0.566699999999999982
@@ -65,7 +64,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.9.6';3;'06 Apr 2023 15:23:02'
+VMDriseset=:'0.9.7';11;'08 Apr 2023 13:45:18'
 
 NB. retains string after first occurrence of (x)
 afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
@@ -182,6 +181,56 @@ r=. (-yl0{r) (yl0)} r
 r
 )
 
+
+baby_today=:3 : 0
+
+NB.*baby_today v-- named Babylonian stars rising/setting today.
+NB.
+NB. monad:  (bt ; clLoc ; flParms) =. baby_today uuIgnore
+
+jd=. julfrcal ymd=. 3 {. 6!:0 ''
+(ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME) baby_today y
+:
+NB. star data
+({."1 IAU)=. {:"1 IAU [ 'IAU NAV'=. loadstars 0
+bs=. babylonian_named_stars 0 
+
+NB. !(*)=. IAU_Name Designation
+'Rs lName cParms'=. x today_calc }. 0 {"1 bs
+NB. include Designation names
+Rs=. 1 0 2 3 {"1 Rs ,.~ (IAU_Name i. 0 {"1 Rs){Designation
+Rs;lName;cParms
+)
+
+
+babylonian_named_stars=:3 : 0
+
+NB.*babylonian_named_stars v-- identified Babylonian stars approx
+NB. 1500 BCE.
+NB.
+NB. Stars with  modern  names identified from  ancient Babylonian
+NB. tablets. Most stars will be shining long  after we  are gone.
+NB. It's fun to seek out  stars that the ancients found important
+NB. enough to catalog.  Source data comes  from a spreadsheet TAB
+NB. here:
+NB.
+NB. https://www.iau.org/public/themes/naming_stars/
+NB.
+NB. monad:  bt=. babylonian_named_stars uuIgnore
+
+NB. load babylonian stars !(*)=. HIP IAU_Name jpath
+bs=. parsebomcsv read jpath '~addons/jacks/testdata/babylonian_normal_stars.csv'
+
+NB. cross reference with current names
+(0 {"1 ciau)=. 1 {"1 ciau [ 'ciau cnavs'=. loadstars 0
+bs=. bs #~ 1,HIP e.~ }. 0 {"1 bs
+ix=. HIP i. }. 0{"1 bs
+bs=. ('IAU_Name';ix{IAU_Name) ,. bs
+
+NB. remove columns without names
+bs #"1~ ] 0 < #&> 0 { bs
+)
+
 NB. retains string before first occurrence of (x)
 beforestr=:] {.~ 1&(i.~)@([ E. ])
 
@@ -205,7 +254,7 @@ c=. 0{"1 t=. |: y
 p0=. c i. ;:'Vmag RA_J2000 Dec_J2000'
 d=. _999&".&>  p0 { t=. }."1 t
 'invalid mag, ra, dec' assert -. _999 e. d
-p1=. c i. ;:'IAU_Name Designation Bayer_Name'  
+p1=. c i. ;:'IAU_Name Designation HIP Bayer_Name'  
 c ,. (<"1 ] p1 { t) , <"1 d
 )
 
@@ -907,33 +956,35 @@ dPsiDeg=. w % 36000000.0  NB. dPsiDeg = w / 36000000.0
 
 parse_iau_named_stars=:3 : 0
 
-NB.*parse_iau_named_stars v-- IAU named star list to btcl  header
+NB.*parse_iau_named_stars v-- IAU named star  list to btcl header
 NB. table.
 NB.
 NB. Original star name data was downloaded from:
 NB.
 NB. https://www.iau.org/public/themes/naming_stars/
 NB.
-NB. and slightly adjusted in Excel. The data stored  in (futs) is
-NB. a Unicode UTF-8 CSV export.
+NB. and slightly adjusted  in Excel and saved as a Unicode  UTF-8
+NB. CSV export.
 NB.
 NB. monad:  btcl =. parse_iau_named_stars clTxt
 NB.
-NB.   NB. get stars from (futs)
-NB.   NB. od ;:'futs utils' 
-NB.   iau=. ; {: , > {: 4 get 'iau_named_stars_2022_txt'
+NB.   NB. get stars
+NB.   iau=. read jpath '~addons/jacks/testdata/iau_named_stars_2022.txt'
 NB.   parse_iau_named_stars iau
 
-NB. remove any byte order mark
-t=. parsecsv y }.~ (BOM -: (#BOM){.y){0,#BOM
+NB. parse utf8 csv
+t=. parsebomcsv y
 
 NB. extract relevant columns
-c=. ;:'IAU_Name Designation Bayer_Name Vmag RA_J2000 Dec_J2000'
+c=. ;:'IAU_Name Designation HIP Bayer_Name Vmag RA_J2000 Dec_J2000'
 t=. t {"1~ (0 { t) i. c
 
 NB. scrub objects with questionable magnitude
 t #~ _ ~: _999&".&> (c i. <'Vmag') {"1 t
 )
+
+NB. parses utf8 csv files with optional BOM mark
+parsebomcsv=:[: parsecsv [: utf8 ] }.~ 0 3 { ~ (239 187 191{a.) -: 3 {. ]
 
 
 parsecsv=:3 : 0
@@ -1153,6 +1204,9 @@ NB. sort by transit time
 (LOCNAME;LMAG,LHORZ,cParms) ;~ Rsiau {~ /: >2 {"1 Rsiau
 )
 
+NB. character list to UTF-8
+utf8=:8&u:
+
 
 zetzthT0=:3 : 0
 
@@ -1180,14 +1234,17 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230406j152302
+NB. (riseset) interface word(s): 20230408j134518
 NB. ----------------------------
+NB. baby_today  NB. named Babylonian stars rising/setting today
 NB. fmt_today   NB. format today verbs result
 NB. iau_today   NB. named IAU stars rising/setting today
 NB. loadstars   NB. loads riseset star data
 NB. nav_today   NB. named navigation stars rising/setting today
 NB. navdaylist  NB. sky safari 6_0 observing list of today's navigation stars
 NB. riseset     NB. rise, transit, set times of stars
+
+    fmt_today nav_today location_home 0
 )
 
 NB. smoutput 'NB. vmd: ' , ,'0,p<; >q<; >0,0' (8!:2) VMDriseset
