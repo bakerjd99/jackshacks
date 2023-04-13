@@ -64,7 +64,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.9.7';12;'12 Apr 2023 10:41:53'
+VMDriseset=:'0.9.7';13;'13 Apr 2023 09:57:15'
 
 NB. retains string after first occurrence of (x)
 afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
@@ -176,9 +176,7 @@ end.
 xl0=. I. b1 *. (1{y) < 0      NB. IF (X<0.0) THEN PHI=: 180.0-PHI;
 r=. (180 - xl0{r) (xl0)} r    
 yl0=. I. b1 *. (0{y) < 0      NB. IF (Y<0.0) THEN PHI=: -PHI;
-r=. (-yl0{r) (yl0)} r
-
-r
+(-yl0{r) (yl0)} r
 )
 
 
@@ -1234,7 +1232,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230412j104153
+NB. (riseset) interface word(s): 20230413j95715
 NB. ----------------------------
 NB. baby_today  NB. named Babylonian stars rising/setting today
 NB. fmt_today   NB. format today verbs result
