@@ -1,6 +1,5 @@
-
-![JacksHacks todo list] `JacksHacks` TODO
-=========================================
+![](jacksjodlogotiny.png) [`jackshacks` (Selected J-Hacks) TODO](https://github.com/bakerjd99/jackshacks)
+===========================================================================================================
 
 Pending and considered changes for `JacksHacks`.
 The base 36 GUID key is stable over the lifetime of a task.
