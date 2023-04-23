@@ -27,6 +27,9 @@ NB.*end-header
 NB. carriage return character
 CR=:13{a.
 
+NB. minutes before and after sunset (0=ignore sun)
+DARKTRS=:60
+
 NB. seconds per day
 DAYSECS=:86400
 
@@ -48,6 +51,9 @@ LIMITMAG=:3.
 NB. Name/description of observer location
 LOCATIONNAME=:'Meridian'
 
+NB. indicates sun never rises or sets in (sunriseset0) and (sunriseset1) results
+NORISESET=:99
+
 NB. approximate epoch J2000 obliquity of the ecliptic degrees, minutes, seconds
 OBLIQUITYDMS2000=:23 26 21.4480000000000004
 
@@ -64,7 +70,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.9.7';14;'20 Apr 2023 10:44:57'
+VMDriseset=:'0.9.8';2;'23 Apr 2023 14:26:39'
 
 NB. retains string after first occurrence of (x)
 afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
@@ -187,7 +193,7 @@ NB.
 NB. monad:  (bt ; clLoc ; flParms) =. baby_today uuIgnore
 
 jd=. julfrcal ymd=. 3 {. 6!:0 ''
-(ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME) baby_today y
+(ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME;DARKTRS) baby_today y
 :
 NB. star data
 ({."1 IAU)=. {:"1 IAU [ 'IAU NAV'=. loadstars 0
@@ -264,6 +270,31 @@ cosd=:cos@rfd
 
 NB. character table to newline delimited list
 ctl=:}.@(,@(1&(,"1)@(-.@(*./\."1@(=&' '@])))) # ,@((10{a.)&(,"1)@]))
+
+
+darktransits=:4 : 0
+
+NB.*darktransits v-- mask selecting transits before and after sunset.
+NB.
+NB. dyad:  pl =. itHrmn darktransits ilYmd_drk
+NB.
+NB.   'Riseset Location cParms'=. (location_yellowstone~ 1935 7 6) nav_today 0
+NB.   (>{:"1 Riseset) darktransits (3 {. 6!:0''),60   
+
+NB. sunrise and set in day minutes 
+srs=. _2 ]\ ,sunriseset1 (|.OBSLOCATION),UTCOFFSET,1 |. 3 {. y
+
+if.     99 1 -: 0{srs do. 0 #~ #x  NB. sun is always up 
+elseif. 99 0 -: 0{srs do. 1 #~ #x  NB. sun is always down
+elseif. do.
+
+  NB. transit times in day minutes and before/after set minutes
+  rs=. dmfrhm x [ bam=. {: y
+
+  NB. transits occurring when sufficently dark
+  (rs < 0 >. sr - bam) +. rs > 1440 <. ss + bam [ 'sr ss'=. dmfrhm srs
+end.
+)
 
 NB. decimal degrees from degrees, minutes, seconds - inverse (dmsfrdd)
 ddfrdms=:(60"_ #. ]) % 3600"_
@@ -387,6 +418,9 @@ deltaTdy=:(0 {  ]) + 12 %~ 0.5 -~ 1 {  ]
 NB. degrees from radian
 dfr=:*&57.2957795130823229
 
+NB. day minutes from hour minute time: dmfrhm 6 51 ,: 20 39
+dmfrhm=:[: +/"1 [: ] 60 1 *"1 ]
+
 NB. degrees, minutes, seconds from decimal degrees - inverse (ddfrdms)
 dmsfrdd=:<. (,.) 60 60 #: 3600 * 1 | ,
 
@@ -403,7 +437,7 @@ NB.   fmt_today (location_yellowstone~ 1935 7 6) iau_today 0
 'Rs lName cParms'=. y
 
 NB. calc parameters
-hdr=. <;._1' Location Mag-Lim Above-Horz Julian ΔT Longitude Latitude Year Month Day.dd UTCz'  
+hdr=. <;._1' Location Mag-Lim Above-Horz Dusk-Min Julian ΔT Longitude Latitude Year Month Day.dd UTCz'  
 cParms=. ctl ": <(rjust lName , ": ,. cParms) ,. ' ' ,. >hdr
 
 NB. rise/set - sorted by transit time
@@ -438,10 +472,10 @@ NB.
 NB.   'Riseset Location cParms'=. (location_yellowstone~ 1935 7 6) iau_today 0
 
 jd=. julfrcal ymd=. 3 {. 6!:0 ''
-(ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME) iau_today y
+(ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME;DARKTRS) iau_today y
 :
-NB. date, julian, location, UTC timezone, magnitude, horizon, location
-'YMD JD LB UO LMAG LHORZ LOCNAME'=. x
+NB. date, julian, location, UTC timezone, magnitude, horizon, location, dusk mins
+'YMD JD LB UO LMAG LHORZ LOCNAME DARK'=. x
 
 NB. star data
 'IAU NAV'=. loadstars 0
@@ -595,13 +629,15 @@ JULIAN_riseset_=: julfrcal ymd=. x
 
 NB. longitude, latitude with standard signs 
 OBSLOCATION_riseset_=: _116.375956 43.646775  
+
 LOCATIONNAME_riseset_=: 'Home - Meridian'
 
 UTCOFFSET_riseset_=: 6.0   NB. MST time zone
 LIMITMAG_riseset_=:  3.0   NB. stellar magnitude
 LIMITHORZ_riseset_=: 20    NB. degrees above horizon
+DARKTRS_riseset_=: 60      NB. minutes before and after sunset (0=ignore sun)
 
-ymd;JULIAN;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME
+ymd;JULIAN;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME;DARKTRS
 )
 
 
@@ -632,11 +668,12 @@ NB. longitude, latitude with standard signs
 OBSLOCATION_riseset_=: 131.01941 _25.34301
 LOCATIONNAME_riseset_=: 'Uluru - star party diner'
 
-UTCOFFSET_riseset_=: _9.5   NB. time zone
-LIMITMAG_riseset_=: 6.0     NB. stellar magnitude
-LIMITHORZ_riseset_=: 5      NB. degrees above horizon
+UTCOFFSET_riseset_=: _9.5  NB. time zone
+LIMITMAG_riseset_=: 6.0    NB. stellar magnitude
+LIMITHORZ_riseset_=: 5     NB. degrees above horizon
+DARKTRS_riseset_=: 0       NB. minutes before and after sunset (0=ignore sun)
 
-ymd;JULIAN;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME
+ymd;JULIAN;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME;DARKTRS
 )
 
 
@@ -670,8 +707,9 @@ LOCATIONNAME_riseset_=: 'Yellowstone - Old Faithful'
 UTCOFFSET_riseset_=: 6.0   NB. MST time zone
 LIMITMAG_riseset_=:  6.0   NB. stellar magnitude
 LIMITHORZ_riseset_=: 10    NB. degrees above horizon
+DARKTRS_riseset_=: 0       NB. minutes before and after sunset (0=ignore sun)
 
-ymd;JULIAN;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME
+ymd;JULIAN;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME;DARKTRS
 )
 
 
@@ -772,7 +810,7 @@ NB.
 NB.   'Riseset Location cParms'=. (location_yellowstone~ 1935 7 6) nav_today 0
 
 jd=. julfrcal ymd=. 3 {. 6!:0 ''
-(ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME) nav_today y
+(ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME;DARKTRS) nav_today y
 :
 NB. star data
 'IAU NAV'=. loadstars 0
@@ -1170,6 +1208,83 @@ sind=:sin@rfd
 NB. session manager output
 smoutput=:0 0 $ 1!:2&2
 
+
+sunriseset1=:3 : 0
+
+NB.*sunriseset1 v-- computes sun  rise and set  times - see group
+NB. documentation.
+NB.
+NB. This verb has  been adapted from a BASIC program submitted by
+NB. James Brimhall to *Sky &  Telescope's* "shortest  sunrise/set
+NB. program"  contest. Winning entries were  listed in the  March
+NB. 1995 Astronomical Computing column.
+NB.
+NB. monad:  itHM =. sunriseset1 flBLHMDY | ftBHMDY
+NB.
+NB.   NB. rise and set times observer location today
+NB.   td=. (|.OBSLOCATION) , UTCOFFSET, 1 |. 3 {. 6!:0 ''
+NB.   sunriseset1 td
+NB.
+NB.   NB. rise and set times on June 30 1995 on Greenwich meridian
+NB.   t0=.   0 0 0 6 30 1995  NB. equator
+NB.   t1=.  49 0 0 6 30 1995  NB. north - lat of western US/Canada border
+NB.   t2=. _47 0 0 6 30 1995  NB. south - southern Chile and Argentina
+NB.   t3=.  75 0 0 6 30 1995  NB. far north (sun always up)
+NB.   t4=. _75 0 0 6 30 1995  NB. far south (sun always down)
+
+NB. latitude, longitude, time-zone, month, day, year !(*)=. la lo tz m d y
+y=. # la [ 'la lo tz m d y'=. |: tabit y
+dr=. 1r180p1 [ dd=. 360 % 365.25636 [ rt=. 50r60
+
+NB. days into year with leap year adjustment
+dm=. 0 31 59 90 120 151 181 212 243 273 304 334
+dl=. (2 {. dm) , >: 2 }. dm
+bl=. 0 = 4 | y [ m=. <: m
+dy=. d + ((-.bl) * m { dm) + bl * m { dl
+dy=. 0.5 + dy - lo % 360
+
+NB. (th) angle Earth has moved since winter solstice
+th=. 9.357001 + (dd * dy) + 1.914 * sin dr * (dd * dy) - 3.97
+c3=. 0.3978 * cos dr * th
+dc=. (- % dr) * arctan c3 % %: 1 - c3 ^ 2
+
+NB. adjust for positive and negative latitudes
+bl=. la < 0
+a1=. ((-.bl) * (90 - la) + dc) + bl * (90 + la) - dc
+a2=. ((-.bl) * (la - 90) + dc) + bl * (_90 - la) - dc
+
+NB. sun never rises or sets masks
+nvset =. a2 >: - rt [ nvrise=. a1 < - rt
+
+NB. corrections
+drla=. dr * la   [ drdc=. dr * dc
+c1=. ((sin - dr * rt) - (sin drdc) * sin drla) % (cos drdc) * cos drla
+t2=. dr %~ arctan (%: 1 - c1 ^ 2) % c1
+t1=. 360 - t2 [ bl=. c1 < 0
+t2=. (t2 * -.bl) + bl * 180 + t2
+t1=. (t1 * -.bl) + bl * 360 - t2
+
+NB. first order equation of time
+et=. 0.1511 * sin dr * 17.86 + 2 * dddy=. dd * dy
+et=. (_0.1276 * sin dr * dddy - 3.97) - et
+drla=. drdc=. dddy=. 0
+
+NB. time zone adjusted rise and set times
+tr=. (t1 % 15) - 12 [ ts=. t2 % 15
+tr=. tr - et [ ts=. ts - et
+s=. ts + tc [ r=.tr + tc [ tc=.(-tz) - lo % 15
+hrmn=. (<. r) ,: 1 round 60 * 1|r
+hrmn=. hrmn , (<.12 + s) ,: 1 round 60 * 1|s
+
+NB. adjust for when sun never rises or sets
+hrmn=. hrmn *"1 -. bl [ bl=. nvset +. nvrise
+hrmn=. NORISESET (<0;bl # pos) } hrmn [ pos=. i. {: $ hrmn
+1 (<1;nvset # pos) } hrmn
+)
+
+NB. promotes only atoms and lists to tables
+tabit=:]`,:@.(1&>:@(#@$))^:2
+
 NB. appends trailing line feed character if necessary
 tlf=:] , ((10{a.)"_ = {:) }. (10{a.)"_
 
@@ -1183,8 +1298,8 @@ NB.
 NB.   stars=. 'Algol';'Rigel';'Spica'
 NB.   'Riseset cParms'=. (location_uluru 0) today_calc stars
 
-NB. date, julian, location, UTC timezone, magnitude, horizon
-'YMD JD LB UO LMAG LHORZ LOCNAME'=. x
+NB. date, julian, location, UTC timezone, magnitude, horizon, dusk minutes
+'YMD JD LB UO LMAG LHORZ LOCNAME DARK'=. x
 
 'Rsiau cParms'=. (YMD;UO;LB) riseset y
 
@@ -1198,8 +1313,13 @@ Rsiau=. (0 {"1 Rsiau) ,. (0 {&.> ahm) ,. (<2 3){&.> ahm
 NB. retain above local horizon
 Rsiau=. Rsiau #~ LHORZ < 0&{&> 1 {"1 Rsiau
 
+if. 0<DARK do.
+  NB. retain stars transiting when dark 
+  Rsiau=. Rsiau #~ (>{:"1 Rsiau) darktransits (>0{x),DARK
+end.
+
 NB. sort by transit time
-(LOCNAME;LMAG,LHORZ,cParms) ;~ Rsiau {~ /: >2 {"1 Rsiau
+(LOCNAME;LMAG,LHORZ,DARK,cParms) ;~ Rsiau {~ /: >2 {"1 Rsiau
 )
 
 NB. character list to UTF-8
@@ -1232,7 +1352,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230420j104457
+NB. (riseset) interface word(s): 20230423j142639
 NB. ----------------------------
 NB. baby_today  NB. named Babylonian stars rising/setting today
 NB. fmt_today   NB. format today verbs result
