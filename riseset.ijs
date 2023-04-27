@@ -18,6 +18,7 @@ NB. 23mar30 (nav_today) added
 NB. 23apr01 (fmt_today) added
 NB. 23apr06 (navdaylist) added
 NB. 23apr08 (baby_today) added
+NB. 23apr27 show sunrise/set times added (localsun)
 
 coclass 'riseset'
 
@@ -70,7 +71,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.9.8';3;'23 Apr 2023 15:00:01'
+VMDriseset=:'0.9.81';8;'27 Apr 2023 12:21:39'
 
 NB. retains string after first occurrence of (x)
 afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
@@ -190,7 +191,7 @@ baby_today=:3 : 0
 
 NB.*baby_today v-- named Babylonian stars rising/setting today.
 NB.
-NB. monad:  (bt ; clLoc ; flParms) =. baby_today uuIgnore
+NB. monad:  (bt ; clLoc ; itRs ; flParms) =. baby_today uuIgnore
 
 jd=. julfrcal ymd=. 3 {. 6!:0 ''
 (ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME;DARKTRS) baby_today y
@@ -200,10 +201,10 @@ NB. star data
 bs=. babylonian_named_stars 0 
 
 NB. !(*)=. IAU_Name Designation
-'Rs lName cParms'=. x today_calc }. 0 {"1 bs
+'Rs lName sRs cParms'=. x today_calc }. 0 {"1 bs
 NB. include Designation names
 Rs=. 1 0 2 3 {"1 Rs ,.~ (IAU_Name i. 0 {"1 Rs){Designation
-Rs;lName;cParms
+Rs;lName;sRs;cParms
 )
 
 
@@ -276,23 +277,24 @@ darktransits=:4 : 0
 
 NB.*darktransits v-- mask selecting transits before and after sunset.
 NB.
-NB. dyad:  pl =. itHrmn darktransits ilYmd_drk
+NB. dyad:  pl =. itHrmn darktransits (itSrs ; iaMins)
 NB.
 NB.   'Riseset Location cParms'=. (location_yellowstone~ 1935 7 6) nav_today 0
-NB.   (>{:"1 Riseset) darktransits (3 {. 6!:0''),60   
+NB.   srs=. localsun 1935 7 6
+NB.   (>{:"1 Riseset) darktransits srs;60   
 
-NB. sunrise and set in day minutes 
-srs=. _2 ]\ ,sunriseset1 (|.OBSLOCATION),UTCOFFSET,1 |. 3 {. y
+NB. sun rise/set in day minutes - dark minutes
+'srs bam'=. y
 
 if.     99 1 -: 0{srs do. 0 #~ #x  NB. sun is always up 
 elseif. 99 0 -: 0{srs do. 1 #~ #x  NB. sun is always down
 elseif. do.
 
   NB. transit times in day minutes and before/after set minutes
-  rs=. dmfrhm x [ bam=. {: y
+  rs=. dmfrhm x [ 'sr ss'=. dmfrhm srs
 
   NB. transits occurring when sufficently dark
-  (rs < 0 >. sr - bam) +. rs > 1440 <. ss + bam [ 'sr ss'=. dmfrhm srs
+  (rs < 0 >. sr - bam) +. rs > 1440 <. ss + bam 
 end.
 )
 
@@ -434,11 +436,11 @@ NB.
 NB.   fmt_today nav_today 0
 NB.   fmt_today (location_yellowstone~ 1935 7 6) iau_today 0
 
-'Rs lName cParms'=. y
+'Rs lName sRs cParms'=. y
 
 NB. calc parameters
-hdr=. <;._1' Location Mag-Lim Above-Horz Dusk-Min Julian ΔT Longitude Latitude Year Month Day.dd UTCz'  
-cParms=. ctl ": <(rjust lName , ": ,. cParms) ,. ' ' ,. >hdr
+hdr=. <;._1' Location Sunrise Sunset Mag-Lim Above-Horz Dusk-Min Julian ΔT Longitude Latitude Year Month Day.dd UTCz'  
+cParms=. ctl ": <(rjust lName , (":sRs) , ": ,. cParms) ,. ' ' ,. >hdr
 
 NB. rise/set - sorted by transit time
 Rs=. >&.> <"1 |: Rs
@@ -467,7 +469,7 @@ NB. monad:  (bt ; clLoc ; flParms) =. iau_today uuIgnore
 NB.
 NB.   iau_today 0
 NB.
-NB. dyad:  (bt ; clLoc ; flParms) =. blYmd_LB_U0_LMAG_LHORZ_LOC iau_today uuIgnore
+NB. dyad:  (bt ; clLoc ; itSrs ; flParms) =. blYmd_LB_U0_LMAG_LHORZ_LOC iau_today uuIgnore
 NB.
 NB.   'Riseset Location cParms'=. (location_yellowstone~ 1935 7 6) iau_today 0
 
@@ -482,11 +484,11 @@ NB. star data
 ({."1 NAV)=. {:"1 NAV [ ({."1 IAU)=. {:"1 IAU
 
 NB. brighter magnitude limit !(*)=. Vmag IAU_Name Designation
-'Rs lName cParms'=. x today_calc (LMAG > Vmag) # IAU_Name
+'Rs lName sRs cParms'=. x today_calc (LMAG > Vmag) # IAU_Name
 
 NB. include Designation names
 Rs=. 1 0 2 3 {"1 Rs ,.~ (IAU_Name i. 0 {"1 Rs){Designation
-Rs;lName;cParms
+Rs;lName;sRs;cParms
 )
 
 
@@ -599,6 +601,19 @@ if. x-:2 do.
 else.
   (<ciau),<cnavs
 end.
+)
+
+
+localsun=:3 : 0
+
+NB.*localsun v-- location sun rise/set times in hour minutes.
+NB.
+NB. monad:  itRs =. localsun blLB_UO_YMD
+NB.
+NB.   localsun OBSLOCATION;UTCOFFSET;6!:0 ''
+
+'LB UO YMD'=. y
+_2 ]\ ,sunriseset1 (|.LB),UO,1 |. 3 {. YMD
 )
 
 
@@ -805,9 +820,9 @@ NB. monad:  (bt ; clLoc ; flParms) =. nav_today uuIgnore
 NB.
 NB.   nav_today 0
 NB.
-NB. dyad:  (bt ; clLoc ; flParms) =. blYmd_LB_U0_LMAG_LHORZ_LOC nav_today uuIgnore
+NB. dyad:  (bt ; clLoc ; itSrs; flParms) =. blYmd_LB_U0_LMAG_LHORZ_LOC nav_today uuIgnore
 NB.
-NB.   'Riseset Location cParms'=. (location_yellowstone~ 1935 7 6) nav_today 0
+NB.   'Riseset Location sRs cParms'=. (location_yellowstone~ 1935 7 6) nav_today 0
 
 jd=. julfrcal ymd=. 3 {. 6!:0 ''
 (ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME;DARKTRS) nav_today y
@@ -817,11 +832,11 @@ NB. star data
 ({."1 NAV)=. {:"1 NAV [ ({."1 IAU)=. {:"1 IAU
 
 NB. !(*)=. Nav_Star_Name IAU_Name Designation
-'Rs lName cParms'=. x today_calc Nav_Star_Name
+'Rs lName sRs cParms'=. x today_calc Nav_Star_Name
 
 NB. include Designation names
 Rs=. 1 0 2 3 {"1 Rs ,.~ (IAU_Name i. 0 {"1 Rs){Designation
-Rs;lName;cParms
+Rs;lName;sRs;cParms
 )
 
 
@@ -1296,12 +1311,12 @@ NB.
 NB. dyad:  (bt ; flParms) =. blYmd_LB_U0_LMAG_LHORZ iau_today uuIgnore
 NB.
 NB.   stars=. 'Algol';'Rigel';'Spica'
-NB.   'Riseset cParms'=. (location_uluru 0) today_calc stars
+NB.   'Riseset lName sRs cParms'=. (location_uluru 0) today_calc stars
 
 NB. date, julian, location, UTC timezone, magnitude, horizon, dusk minutes
 'YMD JD LB UO LMAG LHORZ LOCNAME DARK'=. x
 
-'Rsiau cParms'=. (YMD;UO;LB) riseset y
+'Rsiau cParms'=. (YMD;UO;LB) riseset y [ srs=. localsun LB;UO;YMD
 
 NB. retain rising setting - circumpolar NIMP
 Rsiau=. Rsiau #~ -. ; 1 {"1 Rsiau
@@ -1313,13 +1328,11 @@ Rsiau=. (0 {"1 Rsiau) ,. (0 {&.> ahm) ,. (<2 3){&.> ahm
 NB. retain above local horizon
 Rsiau=. Rsiau #~ LHORZ < 0&{&> 1 {"1 Rsiau
 
-if. 0<DARK do.
-  NB. retain stars transiting when dark 
-  Rsiau=. Rsiau #~ (>{:"1 Rsiau) darktransits (>0{x),DARK
-end.
+NB. retain stars transiting when dark 
+if. 0<DARK do. Rsiau=. Rsiau #~ (>{:"1 Rsiau) darktransits srs;DARK end.
 
 NB. sort by transit time
-(LOCNAME;LMAG,LHORZ,DARK,cParms) ;~ Rsiau {~ /: >2 {"1 Rsiau
+(LOCNAME;srs;LMAG,LHORZ,DARK,cParms) ;~ Rsiau {~ /: >2 {"1 Rsiau
 )
 
 NB. character list to UTF-8
@@ -1352,7 +1365,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230423j150001
+NB. (riseset) interface word(s): 20230427j122139
 NB. ----------------------------
 NB. baby_today  NB. named Babylonian stars rising/setting today
 NB. fmt_today   NB. format today verbs result
