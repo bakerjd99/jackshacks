@@ -71,7 +71,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.9.81';8;'27 Apr 2023 12:21:39'
+VMDriseset=:'0.9.82';3;'10 May 2023 11:09:04'
 
 NB. retains string after first occurrence of (x)
 afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
@@ -286,8 +286,8 @@ NB.   (>{:"1 Riseset) darktransits srs;60
 NB. sun rise/set in day minutes - dark minutes
 'srs bam'=. y
 
-if.     99 1 -: 0{srs do. 0 #~ #x  NB. sun is always up 
-elseif. 99 0 -: 0{srs do. 1 #~ #x  NB. sun is always down
+if.     (NORISESET,1) -: 0{srs do. 0 #~ #x  NB. sun is always up 
+elseif. (NORISESET,0) -: 0{srs do. 1 #~ #x  NB. sun is always down
 elseif. do.
 
   NB. transit times in day minutes and before/after set minutes
@@ -1365,7 +1365,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230427j122139
+NB. (riseset) interface word(s): 20230510j110904
 NB. ----------------------------
 NB. baby_today  NB. named Babylonian stars rising/setting today
 NB. fmt_today   NB. format today verbs result
