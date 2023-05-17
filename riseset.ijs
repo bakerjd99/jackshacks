@@ -71,7 +71,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.9.82';3;'10 May 2023 11:09:04'
+VMDriseset=:'0.9.82';10;'17 May 2023 09:08:23'
 
 NB. retains string after first occurrence of (x)
 afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
@@ -465,13 +465,13 @@ iau_today=:3 : 0
 
 NB.*iau_today v-- named IAU stars rising/setting today.
 NB.
-NB. monad:  (bt ; clLoc ; flParms) =. iau_today uuIgnore
+NB. monad:  (bt ; clLoc ; itSrs ; flParms) =. iau_today uuIgnore
 NB.
 NB.   iau_today 0
 NB.
 NB. dyad:  (bt ; clLoc ; itSrs ; flParms) =. blYmd_LB_U0_LMAG_LHORZ_LOC iau_today uuIgnore
 NB.
-NB.   'Riseset Location cParms'=. (location_yellowstone~ 1935 7 6) iau_today 0
+NB.   'Riseset Location sRs cParms'=. (location_yellowstone~ 1935 7 6) iau_today 0
 
 jd=. julfrcal ymd=. 3 {. 6!:0 ''
 (ymd;jd;OBSLOCATION;UTCOFFSET;LIMITMAG;LIMITHORZ;LOCATIONNAME;DARKTRS) iau_today y
@@ -816,7 +816,7 @@ nav_today=:3 : 0
 
 NB.*nav_today v-- named navigation stars rising/setting today.
 NB.
-NB. monad:  (bt ; clLoc ; flParms) =. nav_today uuIgnore
+NB. monad:  (bt ; clLoc ; itSrs; flParms) =. nav_today uuIgnore
 NB.
 NB.   nav_today 0
 NB.
@@ -1365,7 +1365,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230510j110904
+NB. (riseset) interface word(s): 20230517j90823
 NB. ----------------------------
 NB. baby_today  NB. named Babylonian stars rising/setting today
 NB. fmt_today   NB. format today verbs result
@@ -1375,10 +1375,8 @@ NB. nav_today   NB. named navigation stars rising/setting today
 NB. navdaylist  NB. sky safari 6_0 observing list of today's navigation stars
 NB. riseset     NB. rise, transit, set times of stars
 
-    fmt_today nav_today location_home 0
+    fmt_today nav_today location_yellowstone 0
 )
-
-NB. smoutput 'NB. vmd: ' , ,'0,p<; >q<; >0,0' (8!:2) VMDriseset
 
 cocurrent 'base'
 coinsert  'riseset'
