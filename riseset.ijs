@@ -71,7 +71,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.9.82';10;'17 May 2023 09:08:23'
+VMDriseset=:'0.9.85';2;'19 May 2023 10:44:16'
 
 NB. retains string after first occurrence of (x)
 afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
@@ -816,7 +816,7 @@ nav_today=:3 : 0
 
 NB.*nav_today v-- named navigation stars rising/setting today.
 NB.
-NB. monad:  (bt ; clLoc ; itSrs; flParms) =. nav_today uuIgnore
+NB. monad:  (bt ; clLoc ; itSrs ; flParms) =. nav_today uuIgnore
 NB.
 NB.   nav_today 0
 NB.
@@ -1308,12 +1308,12 @@ today_calc=:4 : 0
 
 NB.*today_calc v-- named (y) stars rising/setting today.
 NB.
-NB. dyad:  (bt ; flParms) =. blYmd_LB_U0_LMAG_LHORZ iau_today uuIgnore
+NB. dyad:  (bt ; clLoc ; itSrs ; flParms) =. bl today_calc blclIauStars
 NB.
-NB.   stars=. 'Algol';'Rigel';'Spica'
-NB.   'Riseset lName sRs cParms'=. (location_uluru 0) today_calc stars
+NB.   IauStars=. ;:'Algol Rigel Spica'
+NB.   'Riseset lName sRs cParms'=. (location_uluru 0) today_calc IauStars
 
-NB. date, julian, location, UTC timezone, magnitude, horizon, dusk minutes
+NB. date, julian, lat/lon, UTCz, magnitude, horizon, location, dusk minutes
 'YMD JD LB UO LMAG LHORZ LOCNAME DARK'=. x
 
 'Rsiau cParms'=. (YMD;UO;LB) riseset y [ srs=. localsun LB;UO;YMD
@@ -1365,7 +1365,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20230517j90823
+NB. (riseset) interface word(s): 20230519j104416
 NB. ----------------------------
 NB. baby_today  NB. named Babylonian stars rising/setting today
 NB. fmt_today   NB. format today verbs result
