@@ -12,6 +12,7 @@ run any of these scripts. You load jackshacks with commands like:
 
 load '~addons/jacks/ipynb.ijs'
 load '~addons/jacks/riseset.ijs'
+load '~addons/jacks/rsv.ijs'
 
 The subdirectory (testdata) contains sample input files. One of
 the files (small_mirror.db) is a SQLite database that contains
@@ -20,7 +21,7 @@ geotagged image metadata used by (gpxutils.ijs). Other files in
 jackshacks scripts.
 )
 
-VERSION=: '0.9.0'
+VERSION=: '0.9.1'
 
 RELEASE=: ''
 
@@ -37,6 +38,8 @@ riseset.ijs
 riseset.pdf
 riseset_notebook.ipynb
 riseset_notebook.pdf
+rsv.ijs
+rsv.pdf
 testdata/babylonian_normal_stars.csv
 testdata/_DSC8471.NEF.xmp
 testdata/gps_oz_nz_2022.txt
