@@ -42,7 +42,7 @@ NB. bytes that should never be emitted by UTF8 encoders
 UTF8BADBYTES=:_8{.a.
 
 NB. version, make count, and date
-VMDrsv=:'0.1.0';48;'11 Jan 2024 15:47:08'
+VMDrsv=:'0.8.0';01;'12 Jan 2024 11:00:27'
 
 NB. signal with optional message
 assert=:0 0"_ $ 13!:8^:((0: e. ])`(12"_))
@@ -112,7 +112,7 @@ write=:1!:2 ]`<@.(32&>@(3!:0))
 NB.POST_rsv post processor. 
 
 smoutput IFACE=: (0 : 0)
-NB. (rsv) interface word(s): 20240111j154708
+NB. (rsv) interface word(s): 20240112j110027
 NB. ------------------------
 NB. read    NB. reads a file as a list of bytes
 NB. rsvdec  NB. decode rsv bytes - marks nulls with (NULLMARK)
