@@ -50,4 +50,5 @@ testdata/iau_named_stars_2022.txt
 testdata/Navigation_Stars.txt
 testdata/Navigation_Stars.skylist
 testdata/Bright_Stars_Meridian_Almanac_23mar27.md
+testdata/rsv_smoke_test.ijs
 )
