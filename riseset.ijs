@@ -71,7 +71,7 @@ NB. UTC time zone offset in hours
 UTCOFFSET=:6
 
 NB. version, make count and date
-VMDriseset=:'0.9.85';9;'18 Feb 2024 09:53:23'
+VMDriseset=:'0.9.85';10;'25 Feb 2024 11:11:27'
 
 NB. retains string after first occurrence of (x)
 afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
@@ -1365,7 +1365,7 @@ NB. insure degree result rank matches (y) rank
 NB.POST_riseset post processor. 
 
 (".;(0=nc <'SHOWSMO_ijod_'){'1';'SHOWSMO_ijod_') smoutput IFACE=: (0 : 0)
-NB. (riseset) interface word(s): 20240218j95323
+NB. (riseset) interface word(s): 20240225j111127
 NB. ----------------------------
 NB. baby_today  NB. named Babylonian stars rising/setting today
 NB. fmt_today   NB. format today verbs result
@@ -1375,6 +1375,7 @@ NB. nav_today   NB. named navigation stars rising/setting today
 NB. navdaylist  NB. sky safari 6_0 observing list of today's navigation stars
 NB. riseset     NB. rise, transit, set times of stars
 
+    NB. rise/set time example
     fmt_today nav_today location_yellowstone 0
 )
 
