@@ -40,6 +40,8 @@ riseset_notebook.ipynb
 riseset_notebook.pdf
 rsv.ijs
 rsv.pdf
+TileDominoes.ijs
+TileDominoes.pdf
 testdata/babylonian_normal_stars.csv
 testdata/_DSC8471.NEF.xmp
 testdata/gps_oz_nz_2022.txt
