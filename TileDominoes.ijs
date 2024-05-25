@@ -10,7 +10,8 @@ NB.  tiledominoes4 - list 4x4 tile solutions allowing diagonal tiles
 NB.
 NB. created: 2024May20
 NB. changes: --------------------------------------------------------------
-NB. (tiledominoes4) added to explore diagonal tiles
+NB. 24may21 (tiledominoes4) added to explore diagonal tiles
+NB. 24may24 adjusted to allow any (n*m) grid
 
 coclass 'TileDominoes'
 NB.*end-header
@@ -18,11 +19,11 @@ NB.*end-header
 NB. interface words (IFACEWORDSTileDominoes) group
 IFACEWORDSTileDominoes=:<;._1 ' tiledominoes0 tiledominoes1 tiledominoes2 tiledominoes3 tiledominoes4'
 
-NB. root words (ROOTWORDSTileDominoes) group      
+NB. root words (ROOTWORDSTileDominoes) group
 ROOTWORDSTileDominoes=:<;._1 ' IFACEWORDSTileDominoes ROOTWORDSTileDominoes VMDTileDominoes smoutput tiledominoes0 tiledominoes1 tiledominoes2 tiledominoes3 tiledominoes4 tilefreq'
 
 NB. version, make count, and date
-VMDTileDominoes=:'0.8.0';12;'21 May 2024 16:42:48'
+VMDTileDominoes=:'0.8.1';01;'25 May 2024 10:12:14'
 
 NB. signal with optional message
 assert=:0 0"_ $ 13!:8^:((0: e. ])`(12"_))
@@ -34,7 +35,7 @@ NB.*comb v-- all size (x) combinations of i.y
 NB.
 NB. dyad:  it =. iaR comb iaN
 NB.
-NB.   3 comb 5            NB. 5 chose 3 combinations
+NB.   3 comb 5            NB. 5 choose 3 combinations
 NB.   (i. >:5) comb&.> 5  NB. note empty and complete 
 
 k=. i.>:d=.y-x
@@ -89,11 +90,10 @@ NB. monad:  blit =. gridslots uuIgnore
 NB. reversals, rotations, and transposes of 4x4 grid
 riggrids=. <"2 i."1 ] 4 4 , _4 4 , 4 _4 ,: _4 _4
 riggrids=. ~. riggrids , |:&.>  riggrids
-rigslots=. /:~ ~. ; (/:~)"1&.> {{ > /:~ ,2 <\"1 y }}  &.> riggrids
+rigslots=. /:~ ~. ; (/:~)"1&.> {{ > /:~ ,2 <\"1 y }} &.> riggrids
 
 NB. horizontal and vertical tile verb slots should match rigid slots
-grid=. i. 4 4
-slots=. > /:~ ,2 <\"1 grid,|:grid
+slots=. gridvhslots 4 4
 'slots do not match' assert slots -: rigslots
 
 NB. if we allow a domino to split diagonally and
@@ -105,6 +105,9 @@ diagslots=. /:~ > ~. /:~&.> (<"0 ] _2 + #&> diagslots) }.&.> diagslots
 NB. all 2x1 tile slots in 4x4 grid
 rigslots;<diagslots
 )
+
+NB. vertical/horizontal 2x1 slots for rank 2 (y) grids: gridvhslots&.> 4 4;2 4;3 1
+gridvhslots=:[: > [: /:~ [: ; [: ,&.> 2 <\"1&.> |:@i.@] ; i.
 
 NB. session manager output
 smoutput=:0 0 $ 1!:2&2
@@ -135,11 +138,14 @@ NB.
 NB.   NB. as more 2x1 slots are removed random filing works better
 NB.   tilefreq (#@>@(1&{)@tiledominoes0)&> 1000#<0 1 14 15 2 3 8 9 
 
-grid=. i. 4 4                    NB. each cell numbered
-slots=. /:~ ,2 <\"1 grid,|:grid  NB. all 2x1 horizonal & vertical slots
+NB. each cell numbered
+grid=. i. 4 4                    
+
+NB. all 2x1 horizonal & vertical slots
+slots=.  /:~ ; ,&.> 2 <\"1&.> ((|:@]) ; ]) grid
 
 NB. cover grid cells
-cover=. {{ y #~ -. +./@(x&e.) &> y }}
+cover=. {{ y #~ -. +./@(x&e.)&> y }}
 
 NB. a complete cover of a 4x4 grid - returns uncovered cell count - 0 here
 NB. # 14 15 cover 6 10 cover 8 12 cover 4 5 cover 9 13 cover 7 11 cover 2 3 cover 0 1 cover slots
@@ -185,8 +191,7 @@ NB.
 NB. monad:  iaSolutions =. tiledominoes1 uuIgnore
 
 NB. all 2x1 horizonal & vertical slots
-grid=. i. 4 4
-slots=. > /:~ ,2 <\"1 grid,|:grid
+slots=. gridvhslots 4 4
 
 NB. exclude corner slots
 slots=. slots #~ -. +./"1 slots e. 0 15
@@ -218,8 +223,7 @@ NB.   tiledominoes2 0 15  NB. corners missing
 NB.   tiledominoes2 i. 0  NB. no missing cells
 
 NB. all 2x1 horizonal & vertical slots
-grid=. i. 4 4
-slots=. > /:~ ,2 <\"1 grid,|:grid
+slots=. gridvhslots 4 4
 
 NB. only even numbers of cells may be excluded
 NB. as any tiling consists of an even number of cells
@@ -252,11 +256,16 @@ NB. monad:  btilTiles =. tiledominoes3 ilExcludeCells
 NB.
 NB.   tiledominoes3 0 15  NB. corners missing 
 NB.   tiledominoes3 i. 0  NB. no missing cells
+NB.
+NB. dyad. btilTiles =. ilRowsCols tiledominoes3 ilExcludeCells
+NB.
+NB.   NB. allow any rank 2 cell grid - big grids blow memory
+NB.   2 3 tiledominoes3 i. 0
 
+4 4 tiledominoes3 y
+:
 NB. all 2x1 horizonal & vertical slots
-grid=. i. 4 4
-slots=. > /:~ ,2 <\"1 grid,|:grid
-_2 <\"1 slots findtilings y
+_2 <\"1 (gridvhslots x) findtilings y
 )
 
 
@@ -290,8 +299,8 @@ tilefreq=:[: (] { "1~ /:@(0&({ ))) freqdist
 NB.POST_TileDominoes post processor. 
 
 (".;(0=nc <'SHOWSMO_ijod_'){'1';'SHOWSMO_ijod_') smoutput IFACE=: (0 : 0)
-NB. (TileDominoes) interface word(s): 20240521j164248
-NB. --------------------------
+NB. (TileDominoes) interface word(s): 20240525j101214
+NB. ---------------------------------
 NB. tiledominoes0  NB. place 2x1 domino tiles on a 4x4 grid
 NB. tiledominoes1  NB. 4x4 grid missing first/last cell cannot be tiled by 2x1 vh dominoes
 NB. tiledominoes2  NB. count domino tilings of 4x4 grid missing (y) cells
