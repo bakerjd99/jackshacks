@@ -23,7 +23,7 @@ NB. root words (ROOTWORDSTileDominoes) group
 ROOTWORDSTileDominoes=:<;._1 ' IFACEWORDSTileDominoes ROOTWORDSTileDominoes VMDTileDominoes smoutput tiledominoes0 tiledominoes1 tiledominoes2 tiledominoes3 tiledominoes4 tilefreq'
 
 NB. version, make count, and date
-VMDTileDominoes=:'0.8.1';5;'03 Jun 2024 15:35:48'
+VMDTileDominoes=:'0.8.1';9;'12 Aug 2024 13:28:41'
 
 NB. signal with optional message
 assert=:0 0"_ $ 13!:8^:((0: e. ])`(12"_))
@@ -298,8 +298,8 @@ tilefreq=:[: (] { "1~ /:@(0&({ ))) freqdist
 
 NB.POST_TileDominoes post processor. 
 
-(".;(0=nc <'SHOWSMO_ijod_'){'1';'SHOWSMO_ijod_') smoutput IFACE_TileDominoes=: (0 : 0)
-NB. (TileDominoes) interface word(s): 20240603j153548
+smoutput IFACE_TileDominoes=: (0 : 0)
+NB. (TileDominoes) interface word(s): 20240812j132841
 NB. ---------------------------------
 NB. tiledominoes0  NB. place 2x1 domino tiles on a 4x4 grid
 NB. tiledominoes1  NB. 4x4 grid missing first/last cell cannot be tiled by 2x1 vh dominoes
