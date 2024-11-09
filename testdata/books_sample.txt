@@ -1,0 +1,279 @@
+NUMBER	TITLE	AUTHOR	TYPE	YEAR
+1	On Writing	Stephen King	Non-fic	2001
+2	Silencing Science	Steven Milloy & Michael Gough	Non-fic	2001
+3	The Mystery of the Aleph	Amir D. Aczel	Non-fic	2001
+4	The Elegant Universe	Brian Greene	Non-fic	2001
+5	Godel	John L. Casti & Werner DePauli	Non-fic	2001
+6	E=mc^2: A biography of the world's most famous equation	David Bodanic	Non-fic	2002
+7	The Camera	Ansel Adams	Non-fic	2002
+8	The Negative	Ansel Adams	Non-fic	2002
+9	The Klondike Fever	Pierre Berton	Non-fic	2002
+10	The Print	Ansel Adams	Non-fic	2002
+11	Rex Appeal	Peter Larson & Kristin Donnan	Non-fic	2002
+12	The Monk in the Garden	Robin Marantz Henig	Non-fic	2002
+13	Ilium	Dan Simmons	Sci-fic	2003
+14	Olympos	Dan Simmons	Sci-fic	2005
+15	Parallax	Alan W. Hirshfeld	Non-fic	2007
+16	The Singularity is Near	Ray Kurzweil	Non-fic	2007
+17	Quicksilver	Neal Stephenson	Fiction	2007
+18	The Epic of Gilgamesh	Trans: N. K. Sandars	Fiction	2007
+19	The Confusion	Neal Stephenson	Fiction	2007
+20	Poincare's Prize	George G. Szpiro	Non-fic	2010
+21	Anathem	Neal Stephenson	Sci-fic	2011
+22	The God Delusion	Richard Dawkins	Non-fic	2011
+23	Meta Math the quest for Omega 	Gregory Chaitin	Non-fic	2011
+24	The Age of Entanglement	Louisa Gilder	Non-fic	2011
+25	1421: The Year China Discovered America	Gavin Menzies	Non-fic	2011
+26	Cleopatra	Stacy Schiff	History	2011
+27	The Folly of Fools	Robert Trivers	Non-fic	2012
+28	How I Killed Pluto and Why It Had It Coming	Mike Brown	Non-fic	2012
+29	How to Write a Sentence and how to Read One	Stanley Fish	Non-fic	2012
+30	Transit of Venus 1631 to the Present	Nick Lomb	Non-fic	2012
+31	2312	Kim Stanley Robinson	Sci-fic	2012
+32	The Algebraist	Iain M. Banks	Sci-fic	2012
+33	Year Zero	Rob Reid	Sci-fic	2012
+34	Learn You a Haskell for Great Good!	Miran Lipovaca	Programming	2012
+35	Learning JavaScript: A Hands on Guide to the Fundamentals of Modern JavaScript	Tim Wright	Programming	2012
+36	CSS for Print Designers	J. D. Graffam	Programming	2012
+37	Mortality	Christopher Hitchens	Non-fic	2012
+38	Totally Incorrect: Conversations with Doug Casey	Doug Casey	Non-fic	2013
+39	The Real Story of Risk: Adventures in a Hazardous World	Glenn E. Croston	Non-fic	2013
+40	Cosmic Numbers: The Numbers that Define our Universe	James D. Stein	Non-fic	2013
+41	Surface Detail	Iain M. Banks	Sci-fic	2013
+42	A Universe from Nothing: Why There is Something Rather than Nothing	Lawrence M. Krauss	Non-fic	2013
+43	The Failure of Common Knowledge	Douglas E. French	Non-fic	2013
+44	God Is Not Great: How Religion Poisons Everything	Christopher Hitchens	Non-fic	2013
+45	The King of Infinite Space: Euclid and His Elements	David Berlinkski	Non-fic	2013
+46	The Stranger	Albert Camus	Fiction	2013
+47	Enjoy the Decline	Aaron Clarey	Non-fic	2013
+48	The Five Dysfunctions of a Team	Patrick Lencioni	Non-fic	2013
+49	The Myth of Sisyphus	Albert Camus	Non-fic	2013
+50	The Signal and the Noise: Why So Many Predictions Fail - But Some Don't	Nate Silver	Non-fic	2013
+51	Euclid and Jesus	C. K. Raju	Non-fic	2013
+52	"Scatter, Adapt, and Remember: How Humans Will Survive a Mass Extinction"	Annalee Newitz	Non-fic	2013
+53	Probably Approximately Correct	Leslie Valiant	Non-fic	2013
+54	Love and Math: The Heart of Hidden Reality	Edward Frenkel	Non-fic	2013
+55	The Creature from Jekyll Island: A Second look the Federal Reserve	G. Edward Griffin	Non-fic	2014
+56	The Red and the White: a Family Sage of the American West	Andrew R. Graybill	Non-fic	2014
+57	Into the Wild	Jon Krakauer	Non-fic	2014
+58	The Book of Love: Poems of Ecstasy and Longing	"Rumi, trs. Coleman Barks"	Poetry	2014
+59	The Rime of the Ancient Mariner	"Samuel Taylor Coleridge, illustrated Gustave Dore"	Poetry	2014
+60	Infinitesimal: How a Dangerous Mathematical Theory Shaped the Modern World	Amir Alexander	Non-fic	2014
+61	Bowl of Heaven	Gregory Benford & Larry Niven	Sci-fic	2014
+62	Shipstar	Gregory Benford & Larry Niven	Sci-fic	2014
+63	The Emperor's Handbook: A New Translation of The Meditations	"Marcus Aurelius, trs. David Hicks & Scot Hicks"	Philosophy	2014
+64	Things Fall Apart	Chinua Achebe	Fiction	2014
+65	Calculating God	Robert J. Sawyer	Sci-fic	2014
+66	The Big Ten of Grammar: Identifying and Fixing the Ten Most Frequent Grammatical Errors	William Bradshaw	Non-fic	2014
+67	The End is Near and It's Going to be Awesome	Kevin D. Williamson	Non-fic	2014
+68	Sitting Bull	Bill Yenne	Non-fic	2014
+69	The Dreaming Void	Peter F. Hamilton	Sci-fic	2014
+70	Pandora's Star	Peter F. Hamilton	Sci-fic	2014
+71	Judas Unchained	Peter F. Hamilton	Sci-fic	2014
+72	What If?: Serious Scientific Answers to Absurd Hypothetical Questions	Munroe Randall	Non-fic	2014
+73	The Reality Dysfunction: Emergence 1	Peter F. Hamilton	Sci-fic	2014
+74	The Reality Dysfunction: Expansion 2	Peter F. Hamilton	Sci-fic	2014
+75	Blue Remembered Earth	Alastair Reynolds	Sci-fic	2014
+76	The Martian	Andy Weir	Sci-fic	2014
+77	The Abyss Beyond Dreams: A Novel of the Commonwealth	Peter F. Hamilton	Sci-fic	2014
+78	The Perfect Theory: A Century of Geniuses and the Battle over General Relativity	Pedro G. Ferreira	Non-fic	2014
+79	Essentialism: The Disciplined Pursuit of Less	Greg McKeown	Non-fic	2014
+80	Why am I so Wise	"Friedrich Nietzche, trs: Gerta Valentine"	Autobiography	2014
+81	House of Suns	Alastair Reynolds	Sci-fic	2014
+82	Shaman	Kim Stanley Robinson	Fiction	2014
+83	Proxima	Stephen Baxter	Sci-fic	2014
+84	On the Steel Breeze	Alastair Reynolds	Sci-fic	2014
+85	The Fractalist: Memoir of a Scientific Maverick	Benoît B. Mandelbrot	Autobiography	2015
+86	Spoon River Anthology: An Annotated Edition	Edgar Lee Masters	Poetry	2015
+87	Proving Darwin: Making Biology Mathematical	Gregory Chaitin	Non-fic	2015
+88	The Hydrogen Sonata	Iain M. Banks	Sci-fic	2015
+89	Why Homer Matters	Adam Nicolson	Non-fic	2015
+90	Ancillary Justice	Ann Leckie	Sci-fic	2015
+91	The Outer Limits of Reason	Noson S. Yanofsky	Non-fic	2015
+92	Finding Zero	Amir D. Aczel	Non-fic	2015
+93	Genocide of One	"Kazuaki Takano, trs: Philip Gabriel"	Sci-fic	2015
+94	Lexicon	Max Barry	Sci-fic	2015
+95	The Art of Robert Frost	Tim Kendall	Poetry	2015
+96	Tom Sawyer	Mark Twain	Fiction	2015
+97	The Knowledge: How to Rebuild Civilization in the Aftermath of a Cataclysm	Lewis Dartnell	Non-fic	2015
+98	The Theory That Would Not Die	Sharon Bertsch McGrayne	Non-fic	2015
+99	A Poetry Handbook	Mary Oliver	Poetry	2015
+100	How Dante Can Save Your Life	Rod Dreher	Non-fic	2015
+101	Black Hole	Marcia Bartusiak	Non-fic	2015
+102	Euphoria	Lily King	Fiction	2015
+103	Blue Horses	Mary Oliver	Poetry	2015
+104	Ada's Algorithm: How Lord Byron's Daughter Ada Lovelace Launched the Digital Age	James Essinger	Non-fic	2015
+105	The Windup Girl	Paolo Bacigalupi	Sci-fic	2015
+106	The Young T. E. Lawrence	Anthony Sattin	Biography	2015
+107	Seveneves	Neal Stephenson	Sci-fic	2015
+108	Aurora	Kim Stanley Robinson	Sci-fic	2015
+109	Initial Conditions	T. K. Flor	Fiction	2015
+110	Genius At Play: The Curious Mind of John Horton Conway	Siobhan Roberts	Biography	2015
+111	The Flicker Men	Ted Kosmatka	Sci-fic	2015
+112	The Invention of Nature: Alexander von Humboldt's New World	Andrea Wulf	Non-fic	2015
+113	Nine Algorithms That Changed the Future: The Ingenious Ideas That Drive Today's Computers	John MacCormick	Non-fic	2016
+114	Roadside Geology of Missouri	Charles G. Spencer	Non-fic	2016
+115	Lives of the Great Photographers	Juliet Hacking	Biography	2016
+116	The Three-Body Problem	"Liu Cixin, trs: Ken Liu"	Sci-fic	2016
+117	Saturn Run	John Sandford & Ctein	Sci-fic	2016
+118	Poseidon's Wake	Alastair Reynolds	Sci-fic	2016
+119	National Geographic Pocket Guide to Rocks and Minerals of North America	National Geographic Society	Non-fic	2016
+120	Blood and Thunder: The Epic Story of Kit Carson & the Conquest of the American West	Hampton Sides	History	2016
+121	Roadside Geology of New Mexico	Halka Chronic	Non-fic	2016
+122	"A Country of Vast Designs: James K. Polk, the Mexican War and the Conquest of the American Continent"	Robert W. Merry	History	2016
+123	"Great Excavations: Tales of Early Southwestern Archaeology, 1888-1939"	Melinda Elliott 	Non-fic	2016
+124	Read This If You Want to Take Great Photographs	Henry Carroll	Non-fic	2016
+125	Suspicious Minds: Why We Believe Conspiracy Theories 	Rob Brotherton	Non-fic	2016
+126	"The Golden Ticket: P, NP, and the Search for the Impossible "	Lance Fortnow	Non-fic	2016
+127	Great North Road	Peter F. Hamilton	Sci-fic	2016
+128	Navigators of Dune	Brian Herbert & Kevin J. Anderson	Sci-fic	2016
+129	Fallen Dragon	Peter F. Hamilton	Sci-fic	2016
+130	A Night Without Stars: A Novel of the Commonwealth	Peter F. Hamilton	Sci-fic	2016
+131	Roadside Geology of Idaho 	David D. Alt	Non-fic	2016
+132	The Invention of Science: The Scientific Revolution from 1500 to 1750	David Wootton	Non-fic	2016
+133	Soul Machine: The Invention of the Modern Mind	George Makari	Non-fic	2016
+134	Idea Makers: Personal Perspectives on the Lives & Ideas of Some Notable People	Stephen Wolfram	Non-fic	2016
+135	The Case Against the Fed	Murray N. Rothbard	Non-fic	2016
+136	Common Sense	Thomas Paine	History	2016
+137	1177 B.C.: The Year Civilization Collapsed	Eric H. Cline	History	2016
+138	Cogwheels of the Mind: The Story of Venn Diagrams	A.W.F.Edwards	Non-fic	2017
+139	Ego Is the Enemy	Ryan  Holiday	Non-fic	2017
+140	The Unbanking of America: How the New Middle Class Survives	Lisa Servon	Non-fic	2017
+141	Phishing for Phools: The Economics of Manipulation and Deception	George A. Akerlof & Robert J. Shiller	Non-fic	2017
+142	It Happened in Idaho: Remarkable Events That Shaped History	Randy Stapilus	History	2017
+143	"Sun, Moon, Earth: The History of Solar Eclipses, from Omens of Doom to Einstein and Exoplanets"	Tyler Nordgren	Non-fic	2017
+144	Beyond Earth: Our Path to a New Home in the Planets	Charles Wohlforth	Non-fic	2017
+145	The Collapsing Empire	John Scalzi	Sci-fic	2017
+146	Dark Matter	Blake Crouch	Sci-fic	2017
+147	A Big Bang in a Little Room: The Quest to Create New Universes	Zeeya Merali	Non-fic	2017
+148	The Stars Are Legion	Kameron Hurley 	Sci-fic	2017
+149	Miranda and Caliban	Jacqueline Carey	Fantasy	2017
+150	American Eclipse	David Baron	Non-fic	2017
+151	Void Star	Zachary Mason	Sci-fic	2017
+152	Little Black Book of Junk Science	Alex Berezow	Non-fic	2017
+153	The Oregon Trail: An American Saga	David Dary	History	2017
+154	The Oregon Trail: A New American Journey	Rinker Buck	Non-fic	2017
+155	Wagons West: The Epic Story of America's Overland Trails	Frank McLynn	History	2017
+156	The Medusa Chronicles	Stephen Baxter & Alastair Reynolds	Sci-fic	2017
+157	The Ends of the World	Peter Brannen	Non-fic	2017
+158	A Man Called Ove	Fredrik Backman	Fiction	2017
+159	Sapiens: A Brief History of Humankind	Yuval Noah Harari	Non-fic	2017
+160	Idaho	Emily Ruskovich	Fiction	2017
+161	The Way We Die Now: The View from Medicine’s Front Line	Seamus O'Mahony	Non-fic	2017
+162	God's Red Son: the Ghost Dance Religion and the Making of Modern America	Louis S. Warren	History	2017
+163	Effective Python: 59 Specific Ways to Write Better Python	Brett Slatkin	Programming	2018
+164	The Telescope in the Ice: Inventing a New Astronomy at the South Pole	Mark Bowen	Non-fic	2018
+165	Elegant Scipy: The Art of Scientific Python	Juan Nunez-Iglesias & Stéfan van der Walt & Harriet Dashnow	Programming	2018
+166	Reading the Rocks: How Victorian Geologists Discovered the Secret of Life	Brenda Maddox	Non-fic	2018
+167	The Long Sunset	Jack McDevitt	Sci-fic	2018
+168	The Case Against Education: Why the Education System Is a Waste of Time and Money	Bryan Caplan	Non-fic	2018
+169	Lost in Math: How Beauty Leads Physics Astray	Sabine Hossenfelder	Non-fic	2018
+170	"Ascendant (The Genesis Fleet, #2)"	Jack Campbell	Sci-fic	2018
+171	Salvation	Peter F. Hamilton	Sci-fic	2018
+172	Losing the Nobel Prize	Brian Keating	Non-fic	2018
+173	Math with Bad Drawings	Ben Orlin	Mathematics	2018
+174	"Rejoice, a Knife to the Heart"	Steven Erikson	Sci-fic	2018
+175	"The Innocents Abroad: Or, the New Pilgrims' Progress"	Mark Twain	Non-fic	2018
+176	Anxiety and the Equation: Understanding Boltzmann's Entropy	Eric Johnson	Non-fic	2018
+177	Homo Deus: A Brief History of Tomorrow	Yuval Noah Harari	Non-fic	2018
+178	Meetings with Remarkable Manuscripts: Twelve Journeys Into the Medieval World	Christopher de Hamel	Non-fic	2019
+179	The Shape of a Life: One Mathematician's Search for the Universe's Hidden Geometry	Shing-Tung Yau	Autobiography	2019
+180	Einstein's Monsters: The Life and Times of Black Holes	Chris Impey	Non-fic	2019
+181	"Semicolon: The Past, Present, and Future of a Misunderstood Mark"	Cecelia Watson	Non-fic	2019
+182	Einstein's Unfinished Revolution: The Search for What Lies Beyond the Quantum	Lee Smolin	Non-fic	2019
+183	Trey & Kate	"C.B. Gabriel, (aka Helen Baker)"	Fiction	2019
+184	Exhalation	Ted  Chiang	Sci-fic	2019
+185	Salvation Lost	Peter F. Hamilton	Sci-fic	2019
+186	Pity the Reader: On Writing With Style	Kurt Vonnegut Jr.	Non-fic	2019
+187	The Deadly Deep: The Definitive History of Submarine Warfare	Iain Ballantyne	Non-fic	2019
+188	Effective SQL: 61 Specific Ways to Write Better SQL	John Viescas	Comp-Sci	2020
+189	J Object Dictionary	John D. Baker	Manual	2020
+190	The Saints of Salvation	Peter F. Hamilton	Sci-fic	2020
+191	The Math(s) Fix: An Education Blueprint for the AI Age	Conrad Wolfram	Non-fic	2021
+192	Programming Elixir ? 1.6: Functional |> Concurrent |> Pragmatic |> Fun	Dave Thomas	Programming	2021
+193	Programming Ecto	Darin Wilson	Programming	2021
+194	Fundamentals: Ten Keys to Reality	Frank Wilczek	Non-fic	2021
+195	Proof! How the World Became Geometrical	Amir Alexander	Non-fic	2021
+196	x + y: A Mathematician's Manifesto for Rethinking Gender	Eugenia Cheng	Non-fic	2021
+197	Logicomix: An Epic Search for Truth	Apostolos K. Doxiadis	Graphic	2021
+198	The Last Stargazers: The Enduring Story of Astronomy's Vanishing Explorers	Emily M. Levesque	Non-fic	2021
+199	Remote Control	Nnedi Okorafor	Sci-fic	2021
+200	Binti (#1)	Nnedi Okorafor	Sci-fic	2021
+201	The Man of Numbers: Fibonacci's Arithmetic Revolution	Keith Devlin	Non-fic	2021
+202	Encounters with Euclid: How an Ancient Greek Geometry Text Shaped the World	Benjamin Wardhaugh	Non-fic	2021
+203	Children of Time	Adrian Tchaikovsky	Sci-fic	2021
+204	Theorem Proving in Lean	"Jeremy Avigad, Leonardo de Moura, Soonho Kong"	Mathematics	2021
+205	Probable Impossibilities: Musings on Beginnings and Endings	Alan Lightman	Non-fic	2021
+206	Exact Thinking in Demented Times: The Vienna Circle and the Epic Quest for the Foundations of Science	Karl Sigmund	Non-fic	2021
+207	The Knowledge Machine: How Irrationality Created Modern Science	Michael Strevens	Non-fic	2021
+208	Journey to the Edge of Reason: The Life of Kurt Godel	Stephen Budiansky	Non-fic	2021
+209	The Backyard Astronomer's Guide	"Terence Dickinson, Alan Dyer, Sara Seager"	Non-fic	2021
+210	The Secrets of Triangles: A Mathematical Journey	Alfred S. Posamentier	Mathematics	2021
+211	Tales of Impossibility: The 2000-Year Quest to Solve the Mathematical Problems of Antiquity	David S. Richeson	Mathematics	2021
+212	"How Mathematics Happened: The First 50,000 Years"	Peter Strom Rudman	Mathematics	2022
+213	"Shape: The Hidden Geometry of Information, Biology, Strategy, Democracy, and Everything Else"	Jordan Ellenberg	Non-fic	2022
+214	To Sleep in a Sea of Stars	Christopher Paolini	Sci-fic	2022
+215	How the Mountains Grew: A New Geological History of North America	John Dvorak	Non-fic	2022
+216	What Is Life?: Five Great Ideas in Biology	Paul Nurse	Non-fic	2022
+217	The Age of Wonder: How the Romantic Generation Discovered the Beauty and Terror of Science	Richard Holmes	Non-fic	2022
+218	The Art of More: How Mathematics Created Civilisation	Michael Brooks	Non-fic	2022
+219	The Writing of the Gods: The Race to Decode the Rosetta Stone	Edward Dolnick	Non-fic	2022
+220	In a Sunburned Country	Bill Bryson	Non-fic	2022
+221	Gilgamesh: The Life of a Poem	Michael Schmidt	Non-fic	2022
+222	On Quality: An Inquiry Into Excellence: Unpublished and Selected Writings	Robert M. Pirsig	Non-fic	2022
+223	The Hate U Give	Angie Thomas	Fiction	2022
+224	Keats: A Brief Life in Nine Poems and One Epitaph	Lucasta Miller	Biography	2022
+225	"Australia's Kakadu Man, Bill Neidjie"	Bill Neidjie	Poetry	2022
+226	The Dawn of Everything: A New History of Humanity	David Graeber & David Wengrow	Non-fic	2022
+227	Shelley: The Pursuit	Richard Holmes	Biography	2022
+228	This Weightless World	Adam Soto	Sci-fic	2022
+229	Return to Uluru: The Hidden History of a Murder in Outback Australia	Mark McKenna	Non-fic	2022
+230	Writing Tools: 50 Essential Strategies for Every Writer	Roy Peter Clark	Non-fic	2022
+231	"River of the Gods: Genius, Courage and Betrayal in the Search for the Source of the Nile"	Candice Millard	Non-fic	2022
+232	Delphi	Clare Pollard	Fiction	2023
+233	River Kings: A New History of the Vikings from Scandinavia to the Silk Roads	Cat Jarman	Non-fic	2023
+234	The Meaning of Proofs: Mathematics as Storytelling	Gabriele Lolli	Mathematics	2023
+235	The Waste Land: A Biography of a Poem	Matthew Hollis	Non-fic	2023
+236	How to Read Now	Elaine Castillo	Non-fic	2023
+237	The Hidden Girl and Other Stories	Ken Liu 	Sci-fic	2023
+238	Murder Your Darlings: And Other Gentle Writing Advice from Aristotle to Zinsser	Roy Peter Clark	Non-fic	2023
+239	Pentagons and Pentagrams: An Illustrated History	Eli Maor	Non-fic	2023
+240	"A Divine Language: Learning Algebra, Geometry, and Calculus at the Edge of Old Age"	Alec Wilkinson	Non-fic	2023
+241	Letters to a Young Poet: The Norton Centenary Edition	"Rainer Maria Rilke, trs: M. D. Herter Norton"	Non-fic	2023
+242	"For the First Time, Again (Take Them to the Stars, #3)"	Sylvain Neuvel	Sci-fic	2023
+243	Fractal Noise	Christopher Paolini	Sci-fic	2023
+244	Violeta	Isabel Allende	Fiction	2023
+245	"Babel, or The Necessity of Violence: An Arcane History of the Oxford Translators' Revolution"	R.F. Kuang	Fiction	2023
+246	The Crest of the Peacock: Non-European Roots of Mathematics	George Gheverghese Joseph	Mathematics	2023
+247	An Applied Mathematician's Apology	Lloyd N. Trefethen	Autobiography	2023
+248	Cloud Cuckoo Land	Anthony Doerr	Fiction	2023
+249	For the Love of Mars: A Human History of the Red Planet	Matthew Shindell	Non-fic	2023
+250	Orwell: The New Life	D.J. Taylor	Biography	2023
+251	Making Darkness Light: A Life of John Milton	Joe Moshenska	Biography	2023
+252	The Tea Girl of Hummingbird Lane	Lisa See	Fiction	2023
+253	The Buried Giant	Kazuo Ishiguro	Fiction	2023
+254	Kingdom of Nauvoo: The Rise and Fall of a Religious Empire on the American Frontier	Benjamin E. Park	Non-fic	2023
+255	A History of Lying	Juan Jacinto Muñoz-Rengel	Non-fic	2023
+256	Zero-Sum: Stories	Joyce Carol Oates	Fiction	2023
+257	TRUTH A BRIEF HISTORY OF TOTAL BULLSHT	Tom Phillips	Non-fic	2023
+258	Radical by Nature: The Revolutionary Life of Alfred Russel Wallace	James T. Costa	Biography	2023
+259	Once Upon a Prime: The Wondrous Connections Between Mathematics and Literature	Sarah Hart	Non-fic	2024
+260	Generation Ship	Michael Mammay	Sci-fic	2024
+261	The Price of Time: The Real Story of Interest	Edward Chancellor	Non-fic	2024
+262	"Probably Overthinking It: How to Use Data to Answer Questions, Avoid Statistical Traps, and Make Better Decisions"	Allen B. Downey	Non-fic	2024
+263	The Waltz of Reason: The Entanglement of Mathematics and Philosophy	Karl Sigmund	Non-fic	2024
+264	Byron: A Life in Ten Letters	Andrew M. Stauffer	Biography	2024
+265	Math Makers: The Lives and Works of 50 Famous Mathematicians	Alfred S. Posamentier	Non-fic	2024
+266	After 1177 B.C.: The Survival of Civilizations	Eric H. Cline	Non-fic	2024
+267	The New Leviathans: Thoughts After Liberalism	John Gray	Non-fic	2024
+268	"A Memory Called Empire (Teixcalaan, #1)"	Arkady Martine	Sci-fic	2024
+269	A Desolation Called Peace	Arkady Martine	Sci-fic	2024
+270	The Rise and Fall of the Dinosaurs: A New History of a Lost World	Steve Brusatte	Non-fic	2024
+271	Red Rising	Pierce Brown	Sci-fic	2024
+272	One Hundred Years of Solitude	"Gabriel García Márquez, trs: Gregory Rabassa"	Fiction	2024
+273	A View from the Stars: Stories and Essays	Cixin Liu	Sci-fic	2024
+274	The Singularity is Nearer	Ray Kurzweil	Non-fic	2024
+275	"The Rise and Reign of the Mammals: A New History, from the Shadow of the Dinosaurs to Us"	Steve Brusatte	Non-fic	2024
+276	A Farewell to Arms	Ernest Hemingway	Fiction	2024
+277	A Brief History of Black Holes: And why nearly everything you know about them is wrong	Becky Smethurst	Non-fic	2024
+278	"Exodus: The Archimedes Engine (Archimedes Engine, #1)"	Peter F.  Hamilton	Sci-fic	2024
