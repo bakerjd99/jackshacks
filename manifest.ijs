@@ -21,13 +21,16 @@ geotagged image metadata used by (gpxutils.ijs). Other files in
 jackshacks scripts.
 )
 
-VERSION=: '0.9.1'
+VERSION=: '0.9.2'
 
 RELEASE=: ''
 
 FOLDER=: 'jacks'
 
 FILES=: 0 : 0
+books.ijs
+books.ipynb
+books.pdf
 brandxmp.ijs
 brandxmp.pdf
 gpxutils.ijs
@@ -43,6 +46,7 @@ rsv.pdf
 TileDominoes.ijs
 TileDominoes.pdf
 testdata/babylonian_normal_stars.csv
+testdata/books_sample.txt
 testdata/_DSC8471.NEF.xmp
 testdata/gps_oz_nz_2022.txt
 testdata/small_mirror.db
