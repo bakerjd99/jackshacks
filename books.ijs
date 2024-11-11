@@ -13,6 +13,7 @@ NB.
 NB. created: 2024nov03
 NB. ------------------------------------------------------------------------------
 NB. 24nov05 (bookctgstats) added
+NB. 24nov11 (fmtbooks) added
 
 coclass 'books'
 NB.*end-header
@@ -30,7 +31,7 @@ NB. root words (ROOTWORDSbooks) group
 ROOTWORDSbooks=:<;._1 ' IFACEWORDSbooks ROOTWORDSbooks VMDbooks bookctgstats booksperyear2 dstat manyauthors manyreads ofreqlist portchars stdbookstab'
 
 NB. version, make count and date
-VMDbooks=:'0.5.0';3;'10 Nov 2024 15:41:00'
+VMDbooks=:'0.5.1';2;'11 Nov 2024 13:25:12'
 
 NB. trims all leading and trailing white space
 allwhitetrim=:] #~ [: -. [: (*./\. +. *./\) ] e. (9 10 13 32{a.)"_
@@ -128,6 +129,23 @@ v=. $,min,max,q1,median,q3,({.@mode2),({.@antimode),mean,stddev,skewness,kurtosi
 t,. ": x round ,. v , y
 )
 
+
+fmtbooks=:4 : 0
+
+NB.*fmtbooks v-- format book counts and authors/titles as bt
+NB.
+NB. dyad:  btCntWtxt =. (ia;il) fmtbooks blcl
+
+'width cnts'=. x
+
+NB. partition by count - sort on first word
+s=. ,&'; '@('_'&rebu)@(' _'&charsub)&.> y
+s=. (width&wrapwords@;)&.> /:~&.> (b=. ~:cnts) <;.1 s
+
+NB. format as bt of counts and word wrapped text
+(~.&.> b <;.1 cnts) ,. ];._2@tlf@('_ '&charsub)&.> s
+)
+
 NB. frequency distribution of boxed list items
 freqlist=:~. ,: [: <"0 #/.~
 
@@ -142,20 +160,18 @@ manyauthors=:4 : 0
 
 NB.*manyauthors v-- authors read more than once.
 NB.
-NB. dyad:  cl =. iaWidth manyauthors btclBtab
+NB. dyad:  btCntAuthors =. iaWidth manyauthors btclBtab
 NB.
 NB.   70 manyauthors stdbookstab '~BOOKS/books.txt'
 
 NB. authors by decreasing read counts
-'author cnt'=. ofreq s: }. y {"1~ (tolower&.> 0{y) i. <'author'
+'author cnts'=. ofreq s: }. y {"1~ (tolower&.> 0{y) i. <'author'
 
 NB. read more than once
-author=. b#author [ cnt=. b#cnt [ b=. 2 <: cnt
+author=. b#author [ cnts=. b#cnts [ b=. 2 <: cnts
 
-NB. format as wrapped author & count
-many=. <"1 (' _' charsub '_' ,. ": ,. cnt) ,"1 '; '
-many=. ;(' _'&charsub&.>5 s:author) ,&.> many
-'_ ' charsub x wrapwords '_'&rebu many 
+NB. format as bt cnts and authors
+(x;cnts) fmtbooks 5 s: author
 )
 
 
@@ -163,20 +179,18 @@ manyreads=:4 : 0
 
 NB.*manyreads v-- books read more than once.
 NB.
-NB. dyad:  cl =. iaWidth manyreads btclBtab
+NB. dyad:  btCntBooks =. iaWidth manyreads btclBtab
 NB.
 NB.   70 manyreads stdbookstab '~BOOKS/books.txt'
 
 NB. titles by decreasing read counts
-'title cnt'=. ofreq s: }. y {"1~ (tolower&.> 0{y) i. <'title'
+'titles cnts'=. ofreq s: }. y {"1~ (tolower&.> 0{y) i. <'title'
 
 NB. read more than once
-title=. b#title [ cnt=. b#cnt [ b=. 2 <: cnt
+titles=. b#titles [ cnts=. b#cnts [ b=. 2 <: cnts
 
-NB. format as wrapped author & count
-many=. <"1 (' _' charsub '_' ,. ": ,. cnt) ,"1 '; '
-many=. ;(' _'&charsub&.>5 s:title) ,&.> many
-'_ ' charsub x wrapwords '_'&rebu many 
+NB. format counts and wrapped titles
+(x;cnts) fmtbooks 5 s: titles
 )
 
 NB. mean value of a list
@@ -274,6 +288,9 @@ allwhitetrim@rebc&.> '"' parsetdwc t
 NB. standard deviation (alternate spelling)
 stddev=:%:@:var
 
+NB. appends trailing line feed character if necessary
+tlf=:] , ((10{a.)"_ = {:) }. (10{a.)"_
+
 NB. convert to lower case
 tolower=:0&(3!:12)
 
@@ -310,7 +327,7 @@ LF (e {~ <: tranclose2 e I. (x+2)+}:_1,e)} y
 NB.POST_books post processor. 
 
 smoutput IFACE_books=: (0 : 0)
-NB. (books) interface word(s): 20241110j154100
+NB. (books) interface word(s): 20241111j132512
 NB. --------------------------
 NB. bookctgstats   NB. book category statistics
 NB. booksperyear2  NB. books per year from standard btcl books table
