@@ -19,6 +19,9 @@ NB. 24nov14 (manyauthors) editors, translators removed, multiple authors split
 coclass 'books'
 NB.*end-header
 
+NB. author suffixes - marks editors, translators, aliases and illustrators
+AUTHORSFXS=:<;._1 ' :ed: :tr: :aka: :ilu:'
+
 NB. carriage return line feed character pair
 CRLF=:13 10{a.
 
@@ -32,10 +35,10 @@ NB. read more than once - must satisfy 2 <: READCNT
 READCNT=:2
 
 NB. root words (ROOTWORDSbooks) group      
-ROOTWORDSbooks=:<;._1 ' IFACEWORDSbooks ROOTWORDSbooks VMDbooks bookctgstats booksperyear2 dstat manyauthors manyreads ofreqlist portchars stdbookstab'
+ROOTWORDSbooks=:<;._1 ' IFACEWORDSbooks ROOTWORDSbooks VMDbooks bookctgstats booksperyear2 dstat manyauthors manyreads portchars stdbookstab'
 
 NB. version, make count and date
-VMDbooks=:'0.5.1';6;'14 Nov 2024 17:07:28'
+VMDbooks=:'0.5.2';8;'15 Nov 2024 12:33:19'
 
 NB. trims all leading and trailing white space
 allwhitetrim=:] #~ [: -. [: (*./\. +. *./\) ] e. (9 10 13 32{a.)"_
@@ -59,8 +62,8 @@ else. y
 end.
 )
 
-NB. retains string before first occurrence of (x)
-beforestr=:] {.~ 1&(i.~)@([ E. ])
+NB. retains string before first occurrence of any string in blcl list
+beforeanystr=:] {.~ 1 i.~ [: +./ [ E.&> [: < ]
 
 
 bookctgstats=:3 : 0
@@ -71,7 +74,7 @@ NB. monad:  ct =. bookctgstats btclBtab
 NB. 
 NB.   bookctgstats stdbookstab '~BOOKS/books.txt'
 
-'ctg cnt'=: ofreqlist }. tolower&.> y {"1~ (tolower&.> 0{y) i. <'type'
+'ctg cnt'=. ofreqlist }. tolower&.> y {"1~ (tolower&.> 0{y) i. <'type'
 ctg ,.' ',.":0.001 round cnt,.(100*cnt%t),.s,.t %~ s=. +/\cnt [ t=. +/cnt
 )
 
@@ -171,9 +174,9 @@ NB. dyad:  btCntAuthors =. iaWidth manyauthors btclBtab
 NB.
 NB.   70 manyauthors stdbookstab '~BOOKS/books.txt'
 
-NB. remove editors and translators
+NB. remove editors, translators, illustrators, et cetera
 authors=. }. y {"1~ (tolower&.> 0{y) i. <'author'
-authors=. ':tr:'&beforestr@(':ed:'&beforestr)&.> authors
+authors=. AUTHORSFXS&beforeanystr&.> authors
 
 NB. split multiple authors to singles
 authors=. rebc@allwhitetrim&.> <;._2 ;'&'&tlc&.> authors
@@ -292,11 +295,13 @@ NB.*stdbookstab v-- standard books table.
 NB.
 NB. monad:  btcl =. stdbookstab clBooksfile
 NB.
+NB.   NB. configured folder data locations
 NB.   btab=. stdbookstab '~BOOKS/books.txt'
+NB.   btab=. stdbookstab '~addons/jacks/testdata/books_sample.txt'
 NB.   btab=. stdbookstab '~JACKSHACKS/testdata/books_sample.txt'
 
 t=. '"' -.~ utf8 read jpath y
-allwhitetrim@rebc&.> '"' parsetdwc t
+rebc@allwhitetrim&.> '"' parsetdwc t
 )
 
 NB. standard deviation (alternate spelling)
@@ -344,7 +349,7 @@ LF (e {~ <: tranclose2 e I. (x+2)+}:_1,e)} y
 NB.POST_books post processor. 
 
 smoutput IFACE_books=: (0 : 0)
-NB. (books) interface word(s): 20241114j170728
+NB. (books) interface word(s): 20241115j123319
 NB. --------------------------
 NB. bookctgstats   NB. book category statistics
 NB. booksperyear2  NB. books per year from standard btcl books table
