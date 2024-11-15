@@ -14,6 +14,7 @@ NB. created: 2024nov03
 NB. ------------------------------------------------------------------------------
 NB. 24nov05 (bookctgstats) added
 NB. 24nov11 (fmtbooks) added
+NB. 24nov14 (manyauthors) editors, translators removed, multiple authors split
 
 coclass 'books'
 NB.*end-header
@@ -27,11 +28,14 @@ IFACEWORDSbooks=:<;._1 ' bookctgstats booksperyear2 manyauthors manyreads stdboo
 NB. line feed character
 LF=:10{a.
 
+NB. read more than once - must satisfy 2 <: READCNT
+READCNT=:2
+
 NB. root words (ROOTWORDSbooks) group      
 ROOTWORDSbooks=:<;._1 ' IFACEWORDSbooks ROOTWORDSbooks VMDbooks bookctgstats booksperyear2 dstat manyauthors manyreads ofreqlist portchars stdbookstab'
 
 NB. version, make count and date
-VMDbooks=:'0.5.1';2;'11 Nov 2024 13:25:12'
+VMDbooks=:'0.5.1';6;'14 Nov 2024 17:07:28'
 
 NB. trims all leading and trailing white space
 allwhitetrim=:] #~ [: -. [: (*./\. +. *./\) ] e. (9 10 13 32{a.)"_
@@ -54,6 +58,9 @@ if. 0 < # y =. ,y do.    NB. no antimodes for null lists
 else. y
 end.
 )
+
+NB. retains string before first occurrence of (x)
+beforestr=:] {.~ 1&(i.~)@([ E. ])
 
 
 bookctgstats=:3 : 0
@@ -164,14 +171,21 @@ NB. dyad:  btCntAuthors =. iaWidth manyauthors btclBtab
 NB.
 NB.   70 manyauthors stdbookstab '~BOOKS/books.txt'
 
+NB. remove editors and translators
+authors=. }. y {"1~ (tolower&.> 0{y) i. <'author'
+authors=. ':tr:'&beforestr@(':ed:'&beforestr)&.> authors
+
+NB. split multiple authors to singles
+authors=. rebc@allwhitetrim&.> <;._2 ;'&'&tlc&.> authors
+
 NB. authors by decreasing read counts
-'author cnts'=. ofreq s: }. y {"1~ (tolower&.> 0{y) i. <'author'
+'authors cnts'=. ofreq s: authors
 
 NB. read more than once
-author=. b#author [ cnts=. b#cnts [ b=. 2 <: cnts
+authors=. b#authors [ cnts=. b#cnts [ b=. READCNT <: cnts
 
 NB. format as bt cnts and authors
-(x;cnts) fmtbooks 5 s: author
+(x;cnts) fmtbooks 5 s: authors
 )
 
 
@@ -187,7 +201,7 @@ NB. titles by decreasing read counts
 'titles cnts'=. ofreq s: }. y {"1~ (tolower&.> 0{y) i. <'title'
 
 NB. read more than once
-titles=. b#titles [ cnts=. b#cnts [ b=. 2 <: cnts
+titles=. b#titles [ cnts=. b#cnts [ b=. READCNT <: cnts
 
 NB. format counts and wrapped titles
 (x;cnts) fmtbooks 5 s: titles
@@ -288,6 +302,9 @@ allwhitetrim@rebc&.> '"' parsetdwc t
 NB. standard deviation (alternate spelling)
 stddev=:%:@:var
 
+NB. terminate with character if not present: '&' tlc 'end it'
+tlc=:] , [ }.~ [ = [: {: ]
+
 NB. appends trailing line feed character if necessary
 tlf=:] , ((10{a.)"_ = {:) }. (10{a.)"_
 
@@ -327,7 +344,7 @@ LF (e {~ <: tranclose2 e I. (x+2)+}:_1,e)} y
 NB.POST_books post processor. 
 
 smoutput IFACE_books=: (0 : 0)
-NB. (books) interface word(s): 20241111j132512
+NB. (books) interface word(s): 20241114j170728
 NB. --------------------------
 NB. bookctgstats   NB. book category statistics
 NB. booksperyear2  NB. books per year from standard btcl books table
