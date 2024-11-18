@@ -5,16 +5,18 @@ NB.
 NB. interface word(s): 
 NB. ------------------------------------------------------------------------------                                 
 NB.  bookctgstats  - book category statistics
+NB.  bookctgstime  - book categories over time
 NB.  booksperyear2 - books per year from standard btcl books table
 NB.  manyauthors   - authors read more than once
 NB.  manyreads     - books read more than once
-NB.  stdbookstab   - standard books table                         
-NB.                                                         
+NB.  stdbookstab   - standard books table
+NB.            
 NB. created: 2024nov03
 NB. ------------------------------------------------------------------------------
 NB. 24nov05 (bookctgstats) added
 NB. 24nov11 (fmtbooks) added
 NB. 24nov14 (manyauthors) editors, translators removed, multiple authors split
+NB. 24nov18 (bookctgstime) added
 
 coclass 'books'
 NB.*end-header
@@ -26,7 +28,7 @@ NB. carriage return line feed character pair
 CRLF=:13 10{a.
 
 NB. interface words (IFACEWORDSbooks) group
-IFACEWORDSbooks=:<;._1 ' bookctgstats booksperyear2 manyauthors manyreads stdbookstab'
+IFACEWORDSbooks=:<;._1 ' bookctgstats bookctgstime booksperyear2 manyauthors manyreads stdbookstab'
 
 NB. line feed character
 LF=:10{a.
@@ -35,10 +37,10 @@ NB. read more than once - must satisfy 2 <: READCNT
 READCNT=:2
 
 NB. root words (ROOTWORDSbooks) group      
-ROOTWORDSbooks=:<;._1 ' IFACEWORDSbooks ROOTWORDSbooks VMDbooks bookctgstats booksperyear2 dstat manyauthors manyreads portchars stdbookstab'
+ROOTWORDSbooks=:<;._1 ' IFACEWORDSbooks ROOTWORDSbooks VMDbooks bookctgstime manyauthors manyreads portchars stdbookstab'
 
 NB. version, make count and date
-VMDbooks=:'0.5.2';10;'15 Nov 2024 13:11:12'
+VMDbooks=:'0.5.3';3;'18 Nov 2024 14:04:22'
 
 NB. trims all leading and trailing white space
 allwhitetrim=:] #~ [: -. [: (*./\. +. *./\) ] e. (9 10 13 32{a.)"_
@@ -79,6 +81,29 @@ ctg ,.' ',.":0.001 round cnt,.(100*cnt%t),.s,.t %~ s=. +/\cnt [ t=. +/cnt
 )
 
 
+bookctgstime=:4 : 0
+
+NB.*bookctgstime v-- book categories over time.
+NB.
+NB. dyad:  blct =. ia bookctgstime btclBtab
+NB.
+NB.    NB. categories over 20 year intervals
+NB.    20 bookctgstime stdbookstab '~BOOKS/books.txt'
+
+NB. split years into groups of (x)
+yr=. ".&> }. y {"1~ (tolower&.> 0{y) i. <'year'
+py=. 0 ,&.> ((-x) <\ ~.yr) I.@e.&.>~ <_1,yr
+
+NB. compute categories over time
+ygr=. py {&.> <y 
+ctgs=. bookctgstats&.> ygr
+
+NB. NOTE: 0 book years are not included
+stats=. 0.01&dstat&.> 1&{@(0&booksperyear2)&.> ygr
+(<"0 yr {~ 1&{&> py) , ctgs ,: stats
+)
+
+
 booksperyear2=:3 : 0
 
 NB.*booksperyear2 v-- books per year from standard btcl books table.
@@ -88,14 +113,23 @@ NB.
 NB.   btab=. stdbookstab '~BOOKS/books.txt' 
 NB.   d=. booksperyear2 btab
 NB.   0.01 dstat 1{d  
+NB.
+NB. dyad: it =. pa booksperyear2 btclBtab
+NB.
+NB.   0 booksperyear2 btab NB. do not merge zero years
 
+1 booksperyear2 y
+:
 h=. tolower&.> 0{y
 d=. }. y
 d=. freqlist (h i. <'year') {"1 d
 d=. (_1&".&> 0{d) ,: ;1{d
 
-NB. merge in missing zero years
-d=. d ,. 0 ,:~ (0{d) -.~ ({.0{d) + i. >:(>./ - <./) 0{d
+if. x do.
+  NB. merge in missing zero years
+  d=. d ,. 0 ,:~ (0{d) -.~ ({.0{d) + i. >:(>./ - <./) 0{d
+end.
+ 
 (/: 0{d) {"1 d
 )
 
@@ -349,9 +383,10 @@ LF (e {~ <: tranclose2 e I. (x+2)+}:_1,e)} y
 NB.POST_books post processor. 
 
 smoutput IFACE_books=: (0 : 0)
-NB. (books) interface word(s): 20241115j131112
+NB. (books) interface word(s): 20241118j140422
 NB. --------------------------
 NB. bookctgstats   NB. book category statistics
+NB. bookctgstime   NB. book categories over time
 NB. booksperyear2  NB. books per year from standard btcl books table
 NB. manyauthors    NB. authors read more than once
 NB. manyreads      NB. books read more than once
