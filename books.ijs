@@ -40,7 +40,7 @@ NB. root words (ROOTWORDSbooks) group
 ROOTWORDSbooks=:<;._1 ' IFACEWORDSbooks ROOTWORDSbooks VMDbooks bookctgstime manyauthors manyreads portchars stdbookstab'
 
 NB. version, make count and date
-VMDbooks=:'0.5.3';3;'18 Nov 2024 14:04:22'
+VMDbooks=:'0.5.3';4;'02 Mar 2025 10:22:48'
 
 NB. trims all leading and trailing white space
 allwhitetrim=:] #~ [: -. [: (*./\. +. *./\) ] e. (9 10 13 32{a.)"_
@@ -383,7 +383,7 @@ LF (e {~ <: tranclose2 e I. (x+2)+}:_1,e)} y
 NB.POST_books post processor. 
 
 smoutput IFACE_books=: (0 : 0)
-NB. (books) interface word(s): 20241118j140422
+NB. (books) interface word(s): 20250302j102248
 NB. --------------------------
 NB. bookctgstats   NB. book category statistics
 NB. bookctgstime   NB. book categories over time

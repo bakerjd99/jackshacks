@@ -21,7 +21,7 @@ geotagged image metadata used by (gpxutils.ijs). Other files in
 jackshacks scripts.
 )
 
-VERSION=: '0.9.2'
+VERSION=: '0.9.3'
 
 RELEASE=: ''
 
@@ -37,6 +37,7 @@ gpxutils.ijs
 gpxutils.pdf
 ipynb.ijs
 ipynb.pdf
+newstory.ijs
 riseset.ijs
 riseset.pdf
 riseset_notebook.ipynb
