@@ -27,6 +27,9 @@ NB. ----------------------------------------------------------------------------
 NB. 25feb10 (gitattributes) added to stub files
 NB. 25mar11 (gitignore) added - working, story, prefix order checked
 
+NB. newstory makes uses of many text fragments 
+NB. in the (stories) jod dictionary
+smoutput oep 'stories' [ require 'general/jod'
 
 coclass 'newstory'
 NB.*end-header
@@ -62,7 +65,7 @@ NB. tab character
 TAB=:a.{~9
 
 NB. version, make count and date
-VMDnewstory=:'0.3.35';7;'15 Mar 2025 15:54:32'
+VMDnewstory=:'0.3.36';3;'10 Apr 2025 14:26:56'
 
 NB. retains string after first occurrence of (x)
 afterstr=:] }.~ #@[ + 1&(i.~)@([ E. ])
@@ -155,7 +158,7 @@ newstory=:4 : 0
 
 NB.*newstory v-- stub out a new story root folder.
 NB.
-NB. dyad:  clStoryPath =. clRootDir newstory blSfileSpfxStitCnt
+NB. dyad:  blclPathTitle =. clRootDir newstory blSfileSpfxStitCnt
 NB.
 NB.   '~temp' newstory 'gonggong_gone';'gpgong';'gqg_';14
 NB.   '~WIP' newstory 'voracious';'vpr';'vqr_';3
@@ -181,6 +184,7 @@ NB. this order helps when browsing file lists
 NB. create directories - ignore if extant
 jmakedir storypath=. (jpath_j_ '/' tlc x),StoryFile,'/'
 jmakedir storypath,'zaside/'
+jmakedir storypath,'zinclusions/'
 
 NB. stub file texts - mostly replaced
 'rc tpt'=. MACRO_ajod_ get StoryTemplate
@@ -200,6 +204,10 @@ pos=. (0 {"1 tpt) i. <'TEMPLATE_docx_bat'
 tpt=. (<('/WORKINGTITLE/',WorkingTitle) changestr ;(<pos;2){tpt) (<pos;2)} tpt
 pos=. (0 {"1 tpt) i. <'TEMPLATE_docx_sh'
 tpt=. (<('/WORKINGTITLE/',WorkingTitle) changestr ;(<pos;2){tpt) (<pos;2)} tpt
+
+pos=. (0 {"1 tpt) i. <'README_md'
+startdate=. timestamp ''
+tpt=. (<('/WORKINGTITLE/',WorkingTitle,'/DATESTORYSTARTED/',startdate) changestr ;(<pos;2){tpt) (<pos;2)} tpt
 
 NB. generate tex root file referencing sections
 pos=. (0 {"1 tpt) i. <'WORKINGTITLE_tex'
@@ -261,7 +269,7 @@ NB. write stub files to directory
 (2 {"1 tpt) write&.> sfiles=. (<storypath) ,&.> 0{"1 tpt
 'not all stub files created' assert fexist sfiles
 
-storypath
+storypath;WorkingTitle
 )
 
 NB. ordered boxed list frequency distribution - see long document
@@ -309,6 +317,28 @@ co=. ;win {'# ';'rem '
 scside=. scn ,&.> <side
 cmds=. ctl co ,"1 >pfx ,&.> scside ,&.> ocmd ,&.> scside ,&.> <ext
 sdir,LF,LF,cmds
+)
+
+
+timestamp=:3 : 0
+
+NB.*timestamp v-- formats timestamp as dd mmm yyyy hr:mn:sc
+NB.
+NB. monad:  cl =. timestamp zu | nlTime
+NB. 
+NB.   timestamp ''              NB. empty now
+NB.   timestamp 2007 9 16       NB. fills missing
+NB.   timestamp 1953 7 2 12 33   
+
+if. 0 = #y do. w=. 6!:0'' else. w=. y end.
+r=. }: $ w
+t=. 2 1 0 3 4 5 {"1 [ _6 [\ , 6 {."1 <. w
+d=. '+++::' 2 6 11 14 17 }"1 [ 2 4 5 3 3 3 ": t
+mth=. _3[\'   JanFebMarAprMayJunJulAugSepOctNovDec'
+d=. ,((1 {"1 t) { mth) 3 4 5 }"1 d
+d=. '0' (I. d=' ') } d
+d=. ' ' (I. d='+') } d
+(r,20) $ d
 )
 
 NB. terminate with character if not present: '&' tlc 'end it'
@@ -374,7 +404,7 @@ NB.   ('anostomypte';'anos_';'_chap';10) workroottex tex
 scn=. secnumbers StorySections
 rps=. allwhitetrim '\end{document}' beforestr 'STORYFILE_preamble.tex}' afterstr y
 rps=. ('/STORYPREFIX/',StoryPrefix,'STORYSECTION',ChapSuffix) changestr rps
-rps=. ;(<2#LF) ,&.>~ (<rps) {{ ('/STORYSECTION/',y) changestr x }}      &.> scn
+rps=. ;(<2#LF) ,&.>~ (<rps) {{ ('/STORYSECTION/',y) changestr x }}               &.> scn
 rps=. allwhitetrim rps
 
 NB. start and end of document
@@ -388,7 +418,7 @@ write=:1!:2 ]`<@.(32&>@(3!:0))
 NB.POST_newstory post processor. 
 
 smoutput IFACE_newstory=: (0 : 0)
-NB. (newstory) interface word(s): 20250315j155432
+NB. (newstory) interface word(s): 20250410j142656
 NB. ----------------------------
 NB. newstory  NB. stub out a new story root folder
 
