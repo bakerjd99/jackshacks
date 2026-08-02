@@ -19,6 +19,7 @@ NB.  gpxfrmapkml          - gpx from Google maps kml
 NB.  gpxfrmirror          - extracts geotagged images from mirror_db and generates gpx
 NB.  gpxfrpoicsv          - converts poi csv files to gpx
 NB.  gpxfrrecent          - gpx from recent waypoints
+NB.  ottawa_quebec_wpt    - update ottawa quebec city trip waypoints
 NB.
 NB. created: 2019dec11
 NB. changes: -----------------------------------------------------
@@ -29,6 +30,7 @@ NB. 25jul18 (csvfrgm) added
 NB. 25jul19 (alaska_yukon_wpt) added
 NB. 25jul25 (loadgpxexclusions) added
 NB. 25sep13 (chile_antarctica_wpt) added
+NB. 26aug02 (ottawa_quebec_wpt) added
 
 require 'data/sqlite regex'
 coclass 'gpxutils'
@@ -97,7 +99,7 @@ NB. regular expression matching placeholder variables in html lists
 HTMLVARBPATTERN=:'{{[a-z]*}}'
 
 NB. interface words (IFACEWORDSgpxutils) group
-IFACEWORDSgpxutils=:<;._1 ' alaska_yukon_wpt allrecent chile_antarctica_wpt csvfrgm csvfrtab csvfrwpt gpskm gpxfrmapkml gpxfrmirror gpxfrpoicsv gpxfrrecent'
+IFACEWORDSgpxutils=:<;._1 ' alaska_yukon_wpt allrecent chile_antarctica_wpt csvfrgm csvfrtab csvfrwpt gpskm gpxfrmapkml gpxfrmirror gpxfrpoicsv gpxfrrecent ottawa_quebec_wpt'
 
 NB. line feed character
 LF=:10{a.
@@ -115,7 +117,7 @@ NB. tab character
 TAB=:a.{~9
 
 NB. version, make count, and date
-VMDgpxutils=:'0.9.3';7;'30 Sep 2025 09:57:03'
+VMDgpxutils=:'0.9.3';13;'02 Aug 2026 16:39:09'
 
 NB. retains string (y) after last occurrence of (x)
 afterlaststr=:] }.~ #@[ + 1&(i:~)@([ E. ])
@@ -510,7 +512,9 @@ NB.*fsd v-- fetch sqlite dictionary array.
 NB.
 NB. dyad:  bt =. clSql fsd clDb
 NB.
-NB.   trg=. 'c:/smugmirror/documents/xrefdb/mirror.db'
+NB.   trg=. 'c:/smugmirror/documents/xrefdb/mirror.db'             NB. win
+NB.   trg=. '~/onedrive/documents/jupyter_notebooks/dbs/mirror.db' NB. unix'es
+NB.
 NB.   sql=. 'select ImageKey, OriginalWidth, OriginalHeight, OnlineImageFile, Keywords from OnlineImage'
 NB.   sql fsd trg
 
@@ -757,6 +761,24 @@ end.
 )
 
 
+ottawa_quebec_wpt=:3 : 0
+
+NB.*ottawa_quebec_wpt  v--  update   ottawa   quebec  city   trip
+NB. waypoints.
+NB.
+NB. Requires configured J folder TRAVEL.
+NB.
+NB. monad:  ottawa_quebec_wpt uuIgnore
+
+NB. !(*)=. jpath smoutput
+csv=. csvfrgm read txt=. jpath '~TRAVEL/ottawa_quebec_city.txt'
+wcnt=. (":#csv),' Ottawa/Quebec waypoints'
+(',' fmtcd csv) write wpts=. jpath '~TRAVEL/ottawa_quebec_city.csv'
+(gpxfrpoicsv wpts) write gpx=. jpath '~TRAVEL/ottawa_quebec_city.gpx'
+,. wcnt;txt;wpts;gpx
+)
+
+
 parsecsv=:3 : 0
 
 NB.*parsecsv v--  parses comma delimited  files. (x) is the field
@@ -869,7 +891,7 @@ write=:1!:2 ]`<@.(32&>@(3!:0))
 NB.POST_gpxutils post processor. 
 
 smoutput IFACE_gpxutils=: (0 : 0)
-NB. (gpxutils) interface word(s): 20250930j95703
+NB. (gpxutils) interface word(s): 20260802j163909
 NB. -----------------------------
 NB. alaska_yukon_wpt      NB. update alaska yukon waypoints
 NB. allrecent             NB. all recent images from last waypoint generation
@@ -882,6 +904,7 @@ NB. gpxfrmapkml           NB. gpx from Google maps kml
 NB. gpxfrmirror           NB. extracts geotagged images from mirror_db and generates gpx
 NB. gpxfrpoicsv           NB. converts poi csv files to gpx
 NB. gpxfrrecent           NB. gpx from recent waypoints
+NB. ottawa_quebec_wpt     NB. update ottawa quebec city trip waypoints
 )
 
 cocurrent 'base'
